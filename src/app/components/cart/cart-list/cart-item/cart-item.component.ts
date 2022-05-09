@@ -11,7 +11,7 @@ import { ProductService } from "src/app/services/product.service";
 })
 export class CartItemComponent implements OnInit {
   @Input() cartItem: CartItem = new CartItem(new Product("dummy", 0, 1, 1, ""));
-  firstAmountItem: number = 0;
+  firstAmountItem = 0;
 
   constructor(private productService: ProductService, private cartService: CartService) {}
 
@@ -20,15 +20,11 @@ export class CartItemComponent implements OnInit {
   }
 
   onChangeQty(qtyUser: any): void {
-    // if (!this.productService.isProductExist(this.cartItem.product)) {
-    //   this.productService.addProduct(this.cartItem.product);
-    // }
-    
     this.productService.updateProductAmount(
       this.cartItem.product,
       this.firstAmountItem - parseInt(qtyUser.target.value)
     );
-    
+
     this.cartItem.qty = parseInt(qtyUser.target.value);
     this.cartService.calcCartTotal();
   }
@@ -42,12 +38,10 @@ export class CartItemComponent implements OnInit {
         );
       }
 
-
-      
       if (!this.productService.isProductExist(this.cartItem.product)) {
         this.productService.addProduct(this.cartItem.product);
       }
-      
+
       if (0 === this.cartItem.qty) {
         this.cartService.removeProductFromCart(this.cartItem.product);
       }

@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { adminsUrl } from 'src/app/config/api';
-import { HttpClient } from '@angular/common/http';
+import { Component, OnInit } from "@angular/core";
+import { NgForm } from "@angular/forms";
+import { adminsUrl } from "src/app/config/api";
+import { HttpClient } from "@angular/common/http";
 
 @Component({
-  selector: 'app-authentication-admin',
-  templateUrl: './authentication-admin.component.html',
-  styleUrls: ['./authentication-admin.component.css'],
+  selector: "app-authentication-admin",
+  templateUrl: "./authentication-admin.component.html",
+  styleUrls: ["./authentication-admin.component.css"],
 })
 export class AuthenticationAdminComponent implements OnInit {
   public allowPermissions = false;
@@ -20,6 +20,7 @@ export class AuthenticationAdminComponent implements OnInit {
       email: form.value.email,
       password: form.value.password,
     };
+    
     this.http
       .post<{ email: string; password: string }>(adminsUrl, user)
       .subscribe((obj: any) => {

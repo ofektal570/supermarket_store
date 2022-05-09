@@ -32,7 +32,6 @@ export class CartListComponent implements OnInit {
     });
   }
 
-  //reduce?
   calcCartTotal() {
     this.cartTotal = 0;
     this.cartItems.forEach((item: CartItem) => {
@@ -46,7 +45,7 @@ export class CartListComponent implements OnInit {
 
   buyCart(): void {
     const purchasedProducts: PurchasedProduct[] = [];
-    
+
     this.cartItems.forEach((cartItem: CartItem) => {
       purchasedProducts.push(
         new PurchasedProduct(
@@ -57,8 +56,11 @@ export class CartListComponent implements OnInit {
       );
     });
 
-    this.purchasedCartService.addPurchasedCart(purchasedProducts, this.cartTotal, this.delivery);
-    // this.cartTotal = 0;
+    this.purchasedCartService.addPurchasedCart(
+      purchasedProducts,
+      this.cartTotal,
+      this.delivery
+    );
     this.cartService.emptyCart();
     alert("Thank you for buying");
   }
@@ -74,22 +76,6 @@ export class CartListComponent implements OnInit {
       this.cartService.emptyCart();
     }
   }
-
-  // returnProduct(item: CartItem): void {
-  //   if (confirm("Are you sure to delete " + item.product.name + "?")) {
-  //     ++item.product.amount;
-      
-  //     if (!this.productService.isProductExist(item.product)) {
-  //       this.productService.addProduct(item.product);
-  //     }
-  //     console.log('qtyyy:',item.qty);
-  //     if (0 === item.qty) {
-  //       this.cartService.removeProductFromCart(item.product);
-  //     }
-  //     --item.qty;
-  //     this.calcCartTotal();
-  //   }
-  // }
 
   deliveryOption(event: any): void {
     this.delivery = event.target.value;
