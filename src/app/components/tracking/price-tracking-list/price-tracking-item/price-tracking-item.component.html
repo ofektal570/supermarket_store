@@ -1,44 +1,12 @@
-<!-- <mat-expansion-panel hideToggle>
-  <mat-expansion-panel-header>
-    <mat-panel-title>
-      {{ productToTrack.product.name }}
-    </mat-panel-title>
-  </mat-expansion-panel-header>
-  <p id="header">
-    <span class="date">Date</span><span class="curr-price-col">CurrentPrice</span>
-    <span class="new-price-col">NewPrice</span><span class="percentage-change-col">Percentage Change</span>
-  </p>
-  <div *ngFor="let productPrice of productToTrack.productPrices">
-    <p>
-      <span class="date">{{ productPrice.date }}</span>
-
-      <span class="curr-price-row">
-       {{productPrice.prevPrice | currency: "USD"}}
-      </span>
-      <span class="new-price-row">
-      {{ productPrice.currPrice | currency: "USD" }}
-      </span>
-
-      <small class="percentage-change-row">
-        <mat-icon class="up-arrow" *ngIf="productPrice.arrowDirection === 'up'"
-          >arrow_upward</mat-icon
-        >
-        <mat-icon
-          class="down-arrow"
-          *ngIf="productPrice.arrowDirection === 'down'"
-          >arrow_downward</mat-icon
-        >
-        {{ productPrice.precents }}%
-      </small>
-    </p>
-  </div>
-  <p id="total-changes">{{ productToTrack.productPrices.length }} Changes</p>
-</mat-expansion-panel> -->
 <mat-card class="example-card">
   <mat-card-header>
     <div mat-card-avatar class="example-header-image"></div>
-    <mat-card-title> <span class="title">{{ productToTrack.product.name }}</span></mat-card-title>
-    <mat-card-subtitle>Total changes :{{ productToTrack.productPrices.length }}</mat-card-subtitle>
+    <mat-card-title>
+      <span class="title">{{ productToTrack.product.name }}</span></mat-card-title
+    >
+    <mat-card-subtitle
+      >Total changes :{{ productToTrack.productPrices.length }}</mat-card-subtitle
+    >
   </mat-card-header>
   <mat-icon (click)="displayTable = !displayTable">expand_more</mat-icon>
 </mat-card>

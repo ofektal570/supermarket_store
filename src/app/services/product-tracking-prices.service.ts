@@ -1,15 +1,13 @@
-import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
-import { Product } from '../models/product';
-import { ProductTrackingPrices } from '../models/product-tracking-prices';
+import { Injectable } from "@angular/core";
+import { Observable, Subject } from "rxjs";
+import { Product } from "../models/product";
+import { ProductTrackingPrices } from "../models/product-tracking-prices";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class ProductTrackingPricesService {
-  private productsTrackingPricesListener = new Subject<
-    ProductTrackingPrices[]
-  >();
+  private productsTrackingPricesListener = new Subject<ProductTrackingPrices[]>();
   private productsTrackingPrices: ProductTrackingPrices[] = [];
 
   constructor() {}

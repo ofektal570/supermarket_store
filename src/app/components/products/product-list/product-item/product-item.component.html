@@ -1,21 +1,3 @@
-<!-- <h3 class="card-text">{{ productItem.name }}</h3>
-<img
-  class="bd-placeholder-img card-img-top p-2"
-  [src]="productItem.image_url"
-/>
-<br />
-<div class="card-body">
-  <p class="card-text">
-    <strong>{{ productItem.currPrice | currency: "USD" }}</strong>
-    <small *ngIf="productItem.currPrice - productItem.prevPrice !== 0 && productItem.prevPrice !== 0">
-      {{ calcChangePriceInPercent() }}%
-      <mat-icon id="up-arrow" *ngIf="arrowDirection === 'up'" >arrow_upward</mat-icon>
-      <mat-icon id="down-arrow" *ngIf="arrowDirection === 'down'">arrow_downward</mat-icon>
-    </small>
-  </p>
-  <p class="card-text">Amount : {{ productItem.amount }}</p>
-</div> -->
-
 <div class="d-flex justify-content-between p-3">
   <p class="lead mb-0 title" *ngIf="productItem.prevPrice !== 0">
     Price is changed by {{ calcChangePriceInPercent() }} %

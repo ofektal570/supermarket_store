@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ProductTrackingPrices } from 'src/app/models/product-tracking-prices';
 
 @Component({
   selector: 'app-price-tracking-item',
@@ -8,8 +7,9 @@ import { ProductTrackingPrices } from 'src/app/models/product-tracking-prices';
 })
 export class PriceTrackingItemComponent implements OnInit {
   @Input() productToTrack: any;
-  constructor() {}
-  displayTable = false;
+  public displayTable = false;
+  
+  constructor() { }
   
   ngOnInit(): void {
   }

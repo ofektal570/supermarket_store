@@ -1,74 +1,15 @@
-/* p {
+
+td {
+  width: 40%;
   font-size: 15px;
 }
 
-mat-panel-title {
-  font-size: 18px;
-  margin-left: 50%;
+th {
+  font-size: 15px;
 }
-
-.example-card {
-  max-width: 400px;
-  margin: 1rem;
+tr {
+  width: 40%;
 }
-
-.example-header-image {
-  background-image: url("https://static.vecteezy.com/system/resources/previews/000/546/470/large_2x/dollar-sign-green-vector.jpg");
-  background-size: cover;
-}
-
-.down-arrow {
-  color: green;
-}
-
-.up-arrow {
-  color: red;
-}
-
-#date {
-  font-weight: bold;
-  padding-right: 75px;
-}
-
-#total-changes {
-  text-align: center;
-  font-weight: bold;
-}
-
-#header {
-  font-weight: bold;
-  display: block;
-  position: relative;
-}
-.date {
-  float: left;
-}
-
-.curr-price-col {
-  margin-left: 25%;
-}
-
-.new-price-col {
-  margin-left: 25%;
-}
-
-.curr-price-row {
-  margin-left: 20%;
-}
-
-.new-price-row {
-  margin-left: 27%;
-}
-
-.percentage-change-col {
-  margin-left: 25%;
-}
-
-.percentage-change-row {
-  margin-left: 30%;
-}
- */
-
 .example-header-image {
   background-image: url("https://static.vecteezy.com/system/resources/previews/000/546/470/large_2x/dollar-sign-green-vector.jpg");
   background-size: cover;
@@ -103,14 +44,4 @@ mat-panel-title {
   color: white;
 }
 
-td {
-  width: 40%;
-  font-size: 15px;
-}
 
-th {
-  font-size: 15px;
-}
-tr {
-  width: 40%;
-}

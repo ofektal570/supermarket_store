@@ -1,29 +1,28 @@
+h3 {
+  text-align: left;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+mat-icon {
+  width: 100%;
+}
+
 .example-card {
   max-width: 400px;
   margin: 1rem;
 }
 
 .example-header-image {
-  background-image: url('https://pngset.com/images/green-tick-check-mark-icon-simple-style-icon-green-tick-symbol-first-aid-sign-road-sign-transparent-png-2501888.png');
+  background-image: url("https://pngset.com/images/green-tick-check-mark-icon-simple-style-icon-green-tick-symbol-first-aid-sign-road-sign-transparent-png-2501888.png");
   background-size: cover;
 }
 
-.price{
+.price {
   float: right;
   font-weight: bold;
 }
 
-.title{
-  font-size:15px;
-}
-
-h3{
-  text-align: left;
-  font-weight: bold;
-  font-size:15px;
-
-}
-
-mat-icon{
-  width:100%;
+.title {
+  font-size: 15px;
 }

@@ -67,11 +67,7 @@ export class ProductService {
     return this.products.includes(product);
   }
   updateProductAmount(product: Product, newAmount: number): void {
-    // if (newAmount === 0) {
-      // this.deleteProduct(product);
-    // } else {
-      product.amount = newAmount;
-    // }
+    product.amount = newAmount;
     this.productsListener.next(this.products);
   }
 }

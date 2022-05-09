@@ -2,7 +2,6 @@ export class Product {
   private last_update: Date;
 
   constructor(
-    // private id: number,
     public name: string,
     public prevPrice: number,
     public currPrice: number,

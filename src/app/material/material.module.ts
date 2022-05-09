@@ -13,7 +13,6 @@ import { MatMenuModule } from '@angular/material/menu';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSelectModule } from '@angular/material/select';
 import { MatGridListModule } from '@angular/material/grid-list';
-import { MatTableModule } from '@angular/material/table';
 
 const MaterialComponents = [
   MatToolbarModule,
@@ -30,7 +29,6 @@ const MaterialComponents = [
   BrowserAnimationsModule,
   MatSelectModule,
   MatGridListModule,
-  MatTableModule,
 ];
 
 @NgModule({

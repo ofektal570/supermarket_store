@@ -1,4 +1,4 @@
-import { Product } from './product';
+import { Product } from "./product";
 
 export class ProductTrackingPrices {
   public productPrices: {
@@ -14,14 +14,13 @@ export class ProductTrackingPrices {
   }
 
   addNewTracking(prevPrice: number, currPrice: number) {
-    let arrowDirection = '';
-    let precentsChange: number | string =
-      ((prevPrice - currPrice) / prevPrice) * 100;
+    let arrowDirection = "";
+    let precentsChange: number | string = ((prevPrice - currPrice) / prevPrice) * 100;
 
     if (precentsChange > 0) {
-      arrowDirection = 'down';
+      arrowDirection = "down";
     } else {
-      arrowDirection = 'up';
+      arrowDirection = "up";
       precentsChange = -precentsChange;
     }
 

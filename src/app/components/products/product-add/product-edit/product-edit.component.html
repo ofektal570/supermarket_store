@@ -6,7 +6,7 @@
   <div class="col-md-4" *ngFor="let product of products">
     <div class="card mb-4 shadow-sm">
       <app-product-item [productItem]="product"></app-product-item>
-      <form #productForm = "ngForm">
+      <form #productForm="ngForm">
         <mat-form-field *ngIf="editedProduct === product && editMode === true">
           <mat-label>Enter New Price</mat-label>
           <input matInput type="number" name="price" required ngModel min="0" />
@@ -17,8 +17,10 @@
         class="btn btn-sm btn-primary product-btn"
         (click)="onUpdatePrice(productForm, product)"
       >
-      <span *ngIf="editedProduct !== product || editMode === false">Update Price</span>
-      <span *ngIf="editedProduct === product && editMode === true">Submit New Price</span>
+        <span *ngIf="editedProduct !== product || editMode === false">Update Price</span>
+        <span *ngIf="editedProduct === product && editMode === true"
+          >Submit New Price</span
+        >
       </button>
 
       <button

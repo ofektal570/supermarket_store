@@ -1,15 +1,17 @@
-.container {
-  width: 20%;
-  margin-top:20px;
-}
 mat-card {
-    text-align: center;
+  text-align: center;
 }
 
 form {
-    display: inline-block;
+  display: inline-block;
 }
 
 button:hover {
-  background-color: #3e8e41
+  background-color: #3e8e41;
 }
+
+.container {
+  width: 20%;
+  margin-top: 20px;
+}
+

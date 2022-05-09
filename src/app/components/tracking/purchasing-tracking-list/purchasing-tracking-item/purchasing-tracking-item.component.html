@@ -1,20 +1,29 @@
 <mat-card class="example-card">
   <mat-card-header>
     <div mat-card-avatar class="example-header-image"></div>
-    <mat-card-title> <span class="title">Purchase made on: {{phrchasedCart.datePurchased}}</span></mat-card-title>
-    <mat-card-subtitle>Total price : {{phrchasedCart.totalPrice | currency: "USD"}} ({{delivery}})</mat-card-subtitle>
+    <mat-card-title>
+      <span class="title"
+        >Purchase made on: {{ phrchasedCart.datePurchased }}</span
+      ></mat-card-title
+    >
+    <mat-card-subtitle
+      >Total price : {{ phrchasedCart.totalPrice | currency: "USD" }} ({{
+        delivery
+      }})</mat-card-subtitle
+    >
   </mat-card-header>
   <mat-icon (click)="expandMore = !expandMore">expand_more</mat-icon>
-  <div *ngIf= "expandMore===true">
+  <div *ngIf="expandMore === true">
     <h3>Purchased products:</h3>
-   <mat-card-content *ngFor="let purchasedProduct of phrchasedCart.purchasedProducts">
-    <p>
-      {{purchasedProduct.productName}}
-      x
-      {{purchasedProduct.qty}}
-      <span class="price">{{purchasedProduct.price * purchasedProduct.qty | currency: "USD"}}</span>
-    </p>
-  </mat-card-content>
+    <mat-card-content *ngFor="let purchasedProduct of phrchasedCart.purchasedProducts">
+      <p>
+        {{ purchasedProduct.productName }}
+        x
+        {{ purchasedProduct.qty }}
+        <span class="price">{{
+          purchasedProduct.price * purchasedProduct.qty | currency: "USD"
+        }}</span>
+      </p>
+    </mat-card-content>
   </div>
-
 </mat-card>

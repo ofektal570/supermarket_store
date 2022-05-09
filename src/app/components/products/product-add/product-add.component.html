@@ -1,49 +1,37 @@
-  <mat-card class="container">
-    <form (submit)="onSubmit(productForm)" #productForm="ngForm">
-      <mat-form-field>
-        <mat-label>Name</mat-label>
-        <input matInput type="text" name="name" required ngModel />
-      </mat-form-field>
-      <br />
-      <mat-form-field>
-        <mat-label>Initial price ($)</mat-label>
-        <input
-          matInput
-          type="number"
-          min="0"
-          name="initPrice"
-          required
-          ngModel
-        />
-      </mat-form-field>
-      <br />
-      <mat-form-field>
-        <mat-label>Amount</mat-label>
-        <input
-          matInput
-          type="number"
-          min="1"
-          name="initAmount"
-          pattern="[0-9]{1,15}"
-          required
-          ngModel
-        />
-      </mat-form-field>
-      <br />
-      <mat-form-field>
-        <mat-label>ImageUrl</mat-label>
-        <input matInput type="url" name="ImageUrl" ngModel />
-      </mat-form-field>
-      <div class="container-div">
-        <button
-          mat-flat-button
-          color="warn"
-          type="submit"
-          [disabled]="!productForm.valid"
-        >
-          Add Product
-        </button>
-      </div>
-    </form>
-  </mat-card>
-  <app-product-edit></app-product-edit>
+<mat-card class="container">
+  <form (submit)="onSubmit(productForm)" #productForm="ngForm">
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <input matInput type="text" name="name" required ngModel />
+    </mat-form-field>
+    <br />
+    <mat-form-field>
+      <mat-label>Initial price ($)</mat-label>
+      <input matInput type="number" min="0" name="initPrice" required ngModel />
+    </mat-form-field>
+    <br />
+    <mat-form-field>
+      <mat-label>Amount</mat-label>
+      <input
+        matInput
+        type="number"
+        min="1"
+        name="initAmount"
+        pattern="[0-9]{1,15}"
+        required
+        ngModel
+      />
+    </mat-form-field>
+    <br />
+    <mat-form-field>
+      <mat-label>ImageUrl</mat-label>
+      <input matInput type="url" name="ImageUrl" ngModel />
+    </mat-form-field>
+    <div class="container-div">
+      <button mat-flat-button color="warn" type="submit" [disabled]="!productForm.valid">
+        Add Product
+      </button>
+    </div>
+  </form>
+</mat-card>
+<app-product-edit></app-product-edit>

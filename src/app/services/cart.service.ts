@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
-import { CartItem } from '../models/cart-item';
-import { Product } from '../models/product';
+import { Injectable } from "@angular/core";
+import { Observable, Subject } from "rxjs";
+import { CartItem } from "../models/cart-item";
+import { Product } from "../models/product";
 
 @Injectable({
   providedIn: "root",
@@ -16,7 +16,7 @@ export class CartService {
     return this.cartItems;
   }
 
-  addProductToCart(product: Product) {
+  addProductToCart(product: Product): void {
     let isExists = false;
     for (let cartItem of this.cartItems) {
       if (cartItem.product === product) {
@@ -32,7 +32,7 @@ export class CartService {
     this.cartItemsListener.next(this.cartItems);
   }
 
-  removeProductFromCart(product: Product) {
+  removeProductFromCart(product: Product): void {
     this.cartItems = this.cartItems.filter(
       (cartItem: CartItem) => cartItem.product !== product
     );
@@ -43,21 +43,12 @@ export class CartService {
     return this.cartItemsListener.asObservable();
   }
 
-  emptyCart() {
+  emptyCart(): void {
     this.cartItems = [];
     this.cartItemsListener.next(this.cartItems);
   }
-  
-  calcCartTotal() {
+
+  calcCartTotal(): void {
     this.cartItemsListener.next(this.cartItems);
   }
-  // amountOfProduct(product: Product): number {
-  //   for (let cartItem of this.cartItems) {
-  //     if (cartItem.product === product) {
-  //       return cartItem.qty;
-  //     }
-  //   }
-
-  //   return 0;
-  // }
 }

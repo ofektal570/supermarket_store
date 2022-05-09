@@ -1,19 +1,9 @@
-<!-- <div class="container center" *ngIf="productsTrackingPrices.length === 0">
-  <h3>There Are no products for tracking prices</h3>
-</div> -->
-
-<!-- <div class="container" *ngIf="productsTrackingPrices.length > 0"> -->
-<!-- <mat-accordion *ngFor="let product of productsTrackingPrices"> -->
-<!-- <app-price-tracking-item [productToTrack] = product></app-price-tracking-item> -->
-<!-- </mat-accordion> -->
-<!-- </div> -->
-
 <div class="container" *ngIf="productsTrackingPrices.length === 0">
   <h3>There Are no products for tracking prices</h3>
 </div>
 
 <div class="row" *ngIf="productsTrackingPrices.length > 0">
-  <div class="col" *ngFor="let product of productsTrackingPrices" >
+  <div class="col" *ngFor="let product of productsTrackingPrices">
     <app-price-tracking-item [productToTrack]="product"></app-price-tracking-item>
   </div>
 </div>

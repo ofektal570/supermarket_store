@@ -1,46 +1,34 @@
 img {
-    height: 300px;
-    width: 100%;
+  height: 300px;
+  width: 100%;
 }
 
-h3{
-  font-weight: bold;
+mat-icon {
+  width: 5px;
   font-size: 20px;
-  padding-top:10px;
+  position: absolute;
 }
 
-mat-icon{
-  width:5px;
-  font-size:20px;
-  position:absolute;
+small {
+  width: 20px;
 }
 
-small{
-  width:20px;
-}
-.title{
-  font-size:13px;
+.title {
+  font-size: 13px;
   font-weight: bold;
 }
-.card-text{
-  font-family: "Courier New", monospace;
-}
-#down-arrow{
-  color:green;
+.align-right {
+  text-align: right;
 }
 
-#up-arrow{
-  color:red;
+.opacity {
+  opacity: 0;
 }
 
-.align-right{
-  text-align:right;
+#down-arrow {
+  color: green;
 }
 
-.opacity{
-  opacity: 0.0;
-}
-
-.center{
-  text-align:center;
+#up-arrow {
+  color: red;
 }
