@@ -9,7 +9,6 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./authentication-admin.component.css'],
 })
 export class AuthenticationAdminComponent implements OnInit {
-  public isLoading = false;
   public allowPermissions = false;
 
   constructor(private http: HttpClient) {}

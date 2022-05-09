@@ -2,8 +2,8 @@ mat-form-field {
   width: 100%;
 }
 
-mat-spinner {
-  margin: auto;
+small{
+  font-size: 12px;
 }
 
 .container{
@@ -12,6 +12,4 @@ mat-spinner {
   text-align: center;
 }
 
-small{
-  font-size: 12px;
-}
+

@@ -1,7 +1,6 @@
 <div class="container" *ngIf="allowPermissions === false">
   <mat-card>
-    <mat-spinner *ngIf="isLoading"></mat-spinner>
-    <form (submit)="onLogin(loginForm)" #loginForm="ngForm" *ngIf="!isLoading">
+    <form (submit)="onLogin(loginForm)" #loginForm="ngForm">
       <mat-form-field>
         <input
           matInput
