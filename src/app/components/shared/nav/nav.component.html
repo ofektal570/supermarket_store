@@ -1,0 +1,25 @@
+<mat-toolbar color="primary">
+  <span>
+    <a routerLink href="/">Supermarket-Store</a>
+  </span>
+  <span class="material-icons">shopping_cart</span>
+  <span class="spacer"></span>
+  <ul>
+    <li>
+      <a mat-button routerLink="/store">Store</a>
+    </li>
+
+    <li>
+      <a mat-button [matMenuTriggerFor]="menu">Tracking</a>
+      <mat-menu #menu="matMenu">
+        <a mat-menu-item class="black" routerLink="/tracking/purchased"
+          >Purchased products</a
+        >
+        <a mat-menu-item class="black" routerLink="/tracking/prices">Price change</a>
+      </mat-menu>
+    </li>
+    <li>
+      <a mat-button routerLink="/system">System</a>
+    </li>
+  </ul>
+</mat-toolbar>

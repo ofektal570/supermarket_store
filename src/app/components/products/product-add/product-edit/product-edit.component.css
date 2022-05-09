@@ -1,0 +1,14 @@
+p{
+  text-align: center;
+  margin-top:50px;
+  border-style: dotted;
+}
+
+.container{
+  text-align: center;
+  margin-top:20px;
+  margin-left: auto;
+  margin-right: auto;
+  cursor: pointer;
+  width: 60%;
+}

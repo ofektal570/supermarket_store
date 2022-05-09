@@ -1,0 +1,33 @@
+<div class="container" *ngIf="products.length < 1">
+  <p>You Don't have products in store</p>
+</div>
+
+<div class="container row" *ngIf="products.length > 0">
+  <div class="col-md-4" *ngFor="let product of products">
+    <div class="card mb-4 shadow-sm">
+      <app-product-item [productItem]="product"></app-product-item>
+      <form #productForm = "ngForm">
+        <mat-form-field *ngIf="editedProduct === product && editMode === true">
+          <mat-label>Enter New Price</mat-label>
+          <input matInput type="number" name="price" required ngModel min="0" />
+        </mat-form-field>
+      </form>
+      <button
+        type="button"
+        class="btn btn-sm btn-primary product-btn"
+        (click)="onUpdatePrice(productForm, product)"
+      >
+      <span *ngIf="editedProduct !== product || editMode === false">Update Price</span>
+      <span *ngIf="editedProduct === product && editMode === true">Submit New Price</span>
+      </button>
+
+      <button
+        type="button"
+        class="btn btn-sm btn-outline-secondary product-btn"
+        (click)="onDeleteProduct(product)"
+      >
+        Delete
+      </button>
+    </div>
+  </div>
+</div>

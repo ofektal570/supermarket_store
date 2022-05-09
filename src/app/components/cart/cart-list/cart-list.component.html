@@ -1,0 +1,112 @@
+<!-- <div *ngIf="cartItems.length === 0" class="container alert alert-info cart">
+  Cart Is Empty
+</div>
+
+<ul *ngIf="cartItems.length > 0" class="list-group container cart">
+  <li class="list-group-item" *ngFor="let item of cartItems">
+    <button type="button" class="btn-close" (click)="returnProduct(item)">
+    </button>
+    <app-cart-item [cartItem]="item"></app-cart-item>
+  </li>
+
+  <li class="list-group-item active">
+    <strong>Total</strong> {{ cartTotal | currency: "USD" }}
+  </li>
+  <button type="button" class="btn btn-outline-secondary" (click)="buyCart()">
+    Buy <mat-icon>store</mat-icon>
+  </button>
+</ul> -->
+
+<section class="h-100 h-custom" style="background-color: #208df360">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-12">
+        <div
+          class="card card-registration card-registration-2"
+          style="border-radius: 15px"
+        >
+          <div class="card-body p-0">
+            <div class="row g-0">
+              <div class="col-lg-8">
+                <div class="p-5">
+                  <div class="d-flex justify-content-between align-items-center mb-5">
+                    <h1 class="fw-bold mb-0 text-black">Shopping Cart</h1>
+                    <h6 class="mb-0 text-muted">{{ calcNumOfProducts() }} items</h6>
+                  </div>
+                  <hr class="my-4" />
+
+                  <div *ngFor="let item of cartItems">
+                    <app-cart-item [cartItem]="item"></app-cart-item>
+                  </div>
+
+                  <div class="pt-5">
+                    <h6 class="mb-0">
+                      <button
+                        type="button"
+                        class="btn btn-dark btn-block btn-lg"
+                        data-mdb-ripple-color="dark"
+                        (click)="emptyCartBeforeBuy()"
+                        [disabled]="cartItems.length === 0"
+                      >
+                        Empty Cart
+                      </button>
+                    </h6>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-4 bg-grey">
+                <div class="p-5">
+                  <h3 class="fw-bold mb-5 mt-2 pt-1">Summary</h3>
+                  <hr class="my-4" />
+
+                  <h5 class="text-uppercase mb-3">Shipping</h5>
+
+                  <div class="mb-4 pb-2">
+                    <select class="form-select" (change)="deliveryOption($event)">
+                      <option value="1">Take-Away - Free</option>
+                      <option value="2">Standard-Delivery - $5.00</option>
+                    </select>
+                  </div>
+                  <form #couponForm="ngForm">
+                    <mat-form-field>
+                      <input
+                        matInput
+                        name="email"
+                        ngModel
+                        type="email"
+                        placeholder="Coupon Code"
+                      />
+                    </mat-form-field>
+                    <button
+                      id="coupon-btn"
+                      mat-raised-button
+                      color="accent"
+                      type="submit"
+                      (click)="couponApply(couponForm)"
+                    >
+                      Apply
+                    </button>
+                  </form>
+                  <div class="d-flex justify-content-between mb-5 spacer">
+                    <h5 class="text-uppercase">Total price</h5>
+                    <h5>{{ cartTotal | currency: "USD" }}</h5>
+                  </div>
+
+                  <button
+                    type="button"
+                    class="btn btn-dark btn-block btn-lg"
+                    data-mdb-ripple-color="dark"
+                    (click)="buyCart()"
+                    [disabled]="cartItems.length === 0"
+                  >
+                    Checkout
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

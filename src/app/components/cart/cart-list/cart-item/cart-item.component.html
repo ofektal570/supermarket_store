@@ -1,0 +1,55 @@
+<!-- <div class="cart-item">
+  <span>{{ cartItem.product.name }}</span> x <span>{{ cartItem.qty }}</span
+  >:
+  <strong>{{ cartItem.qty * cartItem.product.currPrice | currency: "USD" }}</strong>
+</div> -->
+
+<div class="row mb-4 d-flex justify-content-between align-items-center">
+  <div class="col-md-2 col-lg-2 col-xl-2">
+    <img
+      [src]="cartItem.product.image_url"
+      class="img-fluid rounded-3"
+      [alt]="cartItem.product.name"
+    />
+  </div>
+  <div class="col-md-3 col-lg-3 col-xl-3">
+    <h6 class="text-muted"></h6>
+    <h6 class="text-black mb-0">{{ cartItem.product.name }}</h6>
+  </div>
+  <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
+    <button
+      class="btn btn-link px-2"
+      onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
+    >
+      <i class="fas fa-minus"></i>
+    </button>
+
+    <input
+      id="form1"
+      min="0"
+      [max]="firstAmountItem"
+      name="quantity"
+      [value]="cartItem.qty"
+      type="number"
+      class="form-control form-control-sm"
+      (change)="onChangeQty($event)"
+    />
+    <!-- {{ cartItem.qty }} -->
+    <!--     
+        <button type="button" class="btn-close">
+    </button> -->
+  </div>
+  <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+    <h6 class="mb-0">
+      {{ cartItem.product.currPrice * cartItem.qty | currency: "USD" }}
+    </h6>
+  </div>
+  <div class="col-md-1 col-lg-1 col-xl-1 text-end">
+    <button 
+      type="button" 
+      class="btn-close"
+      (click)="returnProduct()"
+      ></button>
+  </div>
+</div>
+<hr class="my-4" />

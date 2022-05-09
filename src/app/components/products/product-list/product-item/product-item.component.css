@@ -1,0 +1,38 @@
+img {
+    height: 300px;
+    width: 100%;
+}
+
+h3{
+  font-weight: bold;
+  font-size: 20px;
+  padding-top:10px;
+}
+
+mat-icon{
+  width:5px;
+  font-size:20px;
+}
+
+.title{
+  font-size:15px;
+  font-weight: bold;
+}
+.card-text{
+  font-family: "Courier New", monospace;
+}
+#down-arrow{
+  color:green;
+}
+
+#up-arrow{
+  color:red;
+}
+
+.align-right{
+  text-align:right;
+}
+
+.opacity{
+  opacity: 0.0;
+}

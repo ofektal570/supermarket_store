@@ -1,0 +1,17 @@
+mat-form-field {
+  width: 100%;
+}
+
+mat-spinner {
+  margin: auto;
+}
+
+.container{
+  width: 35%;
+  margin-top:20px;
+  text-align: center;
+}
+
+small{
+  font-size: 12px;
+}

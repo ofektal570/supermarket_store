@@ -1,0 +1,10 @@
+<div class="container" *ngIf="purchasedCarts.length === 0">
+  <h3>There Are no Purchased Products</h3>
+</div>
+
+<div class="container row" *ngIf="purchasedCarts.length > 0">
+  <div class="container col" *ngFor="let purchasedCart of purchasedCarts">
+    <app-purchasing-tracking-item [phrchasedCart] = "purchasedCart"></app-purchasing-tracking-item>
+  </div>
+</div>
+

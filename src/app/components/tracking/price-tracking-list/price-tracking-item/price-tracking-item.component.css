@@ -1,0 +1,60 @@
+p{
+  font-size:15px;
+}
+
+mat-panel-title{
+  font-size:18px;
+  margin-left:50%;
+}
+
+.down-arrow{
+  color:green;
+}
+
+.up-arrow{
+  color:red;
+}
+
+#date{
+  font-weight:bold;
+  padding-right: 75px;
+}
+
+#total-changes{
+  text-align:center;
+  font-weight:bold;
+}
+
+#header{
+  font-weight:bold;
+  display: block;
+  position: relative;
+}
+.date{
+  float:left;
+}
+
+.curr-price-col{
+  margin-left:25%;
+}
+
+.new-price-col{
+  margin-left:25%;
+}
+
+.curr-price-row{
+  margin-left:20%;
+}
+
+.new-price-row{
+  margin-left:27%;
+}
+
+.percentage-change-col{
+    margin-left:25%;
+}
+
+.percentage-change-row{
+    margin-left:30%;
+}
+
