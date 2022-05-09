@@ -19,8 +19,8 @@ export class ProductItemComponent implements OnInit {
 
   calcChangePriceInPercent(): string {
     let precentsChange =
-      ((this.productItem.prevPrice - this.productItem.currPrice) /
-        this.productItem.prevPrice) *
+      ((this.productItem.prev_price - this.productItem.curr_price) /
+        this.productItem.prev_price) *
       100;
     if (precentsChange > 0) {
       this.arrowDirection = "down";

@@ -14,15 +14,22 @@ export class ProductListComponent implements OnInit {
   constructor(private productService: ProductService, private cartService: CartService) {}
 
   ngOnInit(): void {
-    this.productService.getProducts().subscribe((products) => {
-      console.log("this is the result from the get:", products);
-      this.products = products;
-    });
-    this.productService.listenProducts().subscribe((products: Product[]) => {
-      this.products = products;
+    if (this.productService.isInitialized()) {
+      this.products = this.productService.initProducts();
+    } else {
+      this.loadProducts();
+    }
+
+    this.productService.listenProducts().subscribe((products: Product) => {
+      this.loadProducts();
     });
   }
 
+  loadProducts() {
+    this.productService.getProducts().subscribe((products) => {
+      this.products = products;
+    });
+  }
   addToCart(product: Product): void {
     this.cartService.addProductToCart(product);
     --product.amount;
