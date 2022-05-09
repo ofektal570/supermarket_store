@@ -1,60 +1,116 @@
-p{
-  font-size:15px;
+/* p {
+  font-size: 15px;
 }
 
-mat-panel-title{
-  font-size:18px;
-  margin-left:50%;
+mat-panel-title {
+  font-size: 18px;
+  margin-left: 50%;
 }
 
-.down-arrow{
-  color:green;
+.example-card {
+  max-width: 400px;
+  margin: 1rem;
 }
 
-.up-arrow{
-  color:red;
+.example-header-image {
+  background-image: url("https://static.vecteezy.com/system/resources/previews/000/546/470/large_2x/dollar-sign-green-vector.jpg");
+  background-size: cover;
 }
 
-#date{
-  font-weight:bold;
+.down-arrow {
+  color: green;
+}
+
+.up-arrow {
+  color: red;
+}
+
+#date {
+  font-weight: bold;
   padding-right: 75px;
 }
 
-#total-changes{
-  text-align:center;
-  font-weight:bold;
+#total-changes {
+  text-align: center;
+  font-weight: bold;
 }
 
-#header{
-  font-weight:bold;
+#header {
+  font-weight: bold;
   display: block;
   position: relative;
 }
-.date{
-  float:left;
+.date {
+  float: left;
 }
 
-.curr-price-col{
-  margin-left:25%;
+.curr-price-col {
+  margin-left: 25%;
 }
 
-.new-price-col{
-  margin-left:25%;
+.new-price-col {
+  margin-left: 25%;
 }
 
-.curr-price-row{
-  margin-left:20%;
+.curr-price-row {
+  margin-left: 20%;
 }
 
-.new-price-row{
-  margin-left:27%;
+.new-price-row {
+  margin-left: 27%;
 }
 
-.percentage-change-col{
-    margin-left:25%;
+.percentage-change-col {
+  margin-left: 25%;
 }
 
-.percentage-change-row{
-    margin-left:30%;
+.percentage-change-row {
+  margin-left: 30%;
+}
+ */
+
+.example-header-image {
+  background-image: url("https://static.vecteezy.com/system/resources/previews/000/546/470/large_2x/dollar-sign-green-vector.jpg");
+  background-size: cover;
 }
 
+#prices {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  text-align: center;
+}
+
+#prices td,
+#prices th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#prices tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+#prices tr:hover {
+  background-color: #ddd;
+}
+
+#prices th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: center;
+  background-color: #04aa6d;
+  color: white;
+}
+
+td {
+  width: 40%;
+  font-size: 15px;
+}
+
+th {
+  font-size: 15px;
+}
+tr {
+  width: 40%;
+}

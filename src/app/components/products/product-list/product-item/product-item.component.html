@@ -16,42 +16,39 @@
   <p class="card-text">Amount : {{ productItem.amount }}</p>
 </div> -->
 
-  <div class="d-flex justify-content-between p-3">
-    <p class="lead mb-0 title" *ngIf="productItem.prevPrice !== 0">
-      Change from the last price:
-    </p>
-    <p class="lead mb-0 title" *ngIf="productItem.prevPrice === 0">
-      There isn't a change in the price yet
-    </p>
+<div class="d-flex justify-content-between p-3">
+  <p class="lead mb-0 title" *ngIf="productItem.prevPrice !== 0">
+    Price is changed by {{ calcChangePriceInPercent() }} %
+  </p>
+  <p class="lead mb-0 title" *ngIf="productItem.prevPrice === 0">
+    Price isn't changed yet
+  </p>
 
-    <small
-      *ngIf="
-        productItem.currPrice - productItem.prevPrice !== 0 && productItem.prevPrice !== 0
-      "
-    >
-      {{ calcChangePriceInPercent() }}%
-      <mat-icon id="up-arrow" *ngIf="arrowDirection === 'up'">arrow_upward</mat-icon>
-      <mat-icon id="down-arrow" *ngIf="arrowDirection === 'down'"
-        >arrow_downward</mat-icon
-      >
-    </small>
+  <small
+    *ngIf="
+      productItem.currPrice - productItem.prevPrice !== 0 && productItem.prevPrice !== 0
+    "
+  >
+    <mat-icon id="up-arrow" *ngIf="arrowDirection === 'up'">arrow_upward</mat-icon>
+    <mat-icon id="down-arrow" *ngIf="arrowDirection === 'down'">arrow_downward</mat-icon>
+  </small>
+</div>
+<img [src]="productItem.image_url" class="card-img-top" [alt]="productItem.name" />
+<div class="card-body">
+  <div class="d-flex justify-content-between mb-3">
+    <h5 class="mb-0 ">{{ productItem.name }}</h5>
+    <h5 class="text-dark mb-0">{{ productItem.currPrice | currency: "USD" }}</h5>
   </div>
-  <img [src]="productItem.image_url" class="card-img-top" [alt]="productItem.name" />
-  <div class="card-body">
-    <div class="d-flex justify-content-between mb-3">
-      <h5 class="mb-0 text-uppercase">{{ productItem.name }}</h5>
-      <h5 class="text-dark mb-0">{{ productItem.currPrice | currency: "USD" }}</h5>
-    </div>
 
-    <div class="justify-content-between mb-2 align-right">
-      <p class="small text-danger">
-        <s [ngClass]="arrowDirection === 'up' ? 'opacity' : 'none'">
-          {{ productItem.prevPrice | currency: "USD" }}
-        </s>
-      </p>
-    </div>
-
-    <p class="text-muted mb-0">
-      Available: <span class="fw-bold"> {{ productItem.amount }}</span>
+  <div class="justify-content-between mb-2 align-right">
+    <p class="small text-danger">
+      <s [ngClass]="arrowDirection === 'up' ? 'opacity' : 'none'">
+        {{ productItem.prevPrice | currency: "USD" }}
+      </s>
     </p>
   </div>
+
+  <p class="text-muted mb-0">
+    Available: <span class="fw-bold"> {{ productItem.amount }}</span>
+  </p>
+</div>

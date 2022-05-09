@@ -26,18 +26,18 @@
 
 <div class="center" *ngIf="products.length === 0">
   <img
-  src="https://www.instructorbrandon.com/wp-content/uploads/2019/01/3-blog-1024x576.jpg"
-  alt="image-store"
-  class="store-img"
-/>
+    src="https://www.instructorbrandon.com/wp-content/uploads/2019/01/3-blog-1024x576.jpg"
+    alt="image-store"
+    class="store-img"
+  />
 </div>
 
-<section style="background-color: #eee"  *ngIf="products.length > 0">
+<section style="background-color: #eee" *ngIf="products.length > 0">
   <div class="container row">
     <div class="col-md-4" *ngFor="let product of products">
       <div class="card mb-4 shadow-sm">
         <app-product-item [productItem]="product"></app-product-item>
-        <button mat-button color="accent" (click)="addToCart(product)">
+        <button [disabled]="product.amount === 0" mat-button color="accent" (click)="addToCart(product)">
           <mat-icon>add_shopping_cart</mat-icon>
         </button>
       </div>

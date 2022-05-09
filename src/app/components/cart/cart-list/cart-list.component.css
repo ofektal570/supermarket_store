@@ -74,3 +74,8 @@ border-bottom-right-radius: 16px;
 select{
   font-size: 15px;
 }
+
+.empty-btn{
+  font-size: 15px;
+  float: left;
+}

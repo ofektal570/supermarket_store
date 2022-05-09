@@ -10,21 +10,21 @@ export class ProductService {
 
   products: Product[] = [
     new Product(
-      "pizza",
+      "Pizza",
       0,
       10,
       3,
       "https://media-cdn.tripadvisor.com/media/photo-s/1b/b5/0e/a5/pizza-hut-belfield.jpg"
     ),
     new Product(
-      "hamburger",
+      "Hamburger",
       50,
       35,
       6,
       "https://upload.wikimedia.org/wikipedia/commons/4/47/Hamburger_%28black_bg%29.jpg"
     ),
     new Product(
-      "stake",
+      "Stake",
       40,
       75,
       2,
@@ -67,11 +67,11 @@ export class ProductService {
     return this.products.includes(product);
   }
   updateProductAmount(product: Product, newAmount: number): void {
-    if (newAmount === 0) {
-      this.deleteProduct(product);
-    } else {
+    // if (newAmount === 0) {
+      // this.deleteProduct(product);
+    // } else {
       product.amount = newAmount;
-    }
+    // }
     this.productsListener.next(this.products);
   }
 }

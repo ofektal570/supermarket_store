@@ -57,7 +57,7 @@ export class CartListComponent implements OnInit {
       );
     });
 
-    this.purchasedCartService.addPurchasedCart(purchasedProducts, this.cartTotal);
+    this.purchasedCartService.addPurchasedCart(purchasedProducts, this.cartTotal, this.delivery);
     // this.cartTotal = 0;
     this.cartService.emptyCart();
     alert("Thank you for buying");

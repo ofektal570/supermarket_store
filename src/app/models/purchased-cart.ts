@@ -5,6 +5,7 @@ export class PurchasedCart {
 
   constructor(
     public purchasedProducts: PurchasedProduct[],
-    public totalPrice: number
+    public totalPrice: number,
+    public delivery: number
   ) {}
 }

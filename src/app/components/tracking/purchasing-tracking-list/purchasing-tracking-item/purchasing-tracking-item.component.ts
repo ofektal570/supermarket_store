@@ -10,8 +10,11 @@ import { Component, Input, OnInit } from '@angular/core';
 export class PurchasingTrackingItemComponent implements OnInit {
   @Input() phrchasedCart: any;
   public expandMore = false;
-
+  public delivery: string = '';
+  
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.delivery = this.phrchasedCart.delivery == 1 ? 'Take-Away' : 'Standard-Delivery';
+  }
 }

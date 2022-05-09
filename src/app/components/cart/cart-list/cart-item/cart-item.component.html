@@ -14,7 +14,7 @@
   </div>
   <div class="col-md-3 col-lg-3 col-xl-3">
     <h6 class="text-muted"></h6>
-    <h6 class="text-black mb-0">{{ cartItem.product.name }}</h6>
+    <h6 class="text-black mb-0">{{ cartItem.product.name }}</h6><small> &nbsp; {{ cartItem.product.currPrice | currency: "USD"}}</small> 
   </div>
   <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
     <button
@@ -38,10 +38,15 @@
     <!--     
         <button type="button" class="btn-close">
     </button> -->
+    
   </div>
+  
+      <!-- <span>
+      x 5
+    </span> -->
   <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
     <h6 class="mb-0">
-      {{ cartItem.product.currPrice * cartItem.qty | currency: "USD" }}
+       {{ cartItem.product.currPrice * cartItem.qty | currency: "USD" }}
     </h6>
   </div>
   <div class="col-md-1 col-lg-1 col-xl-1 text-end">

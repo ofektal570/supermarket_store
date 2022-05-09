@@ -20,9 +20,9 @@ export class CartItemComponent implements OnInit {
   }
 
   onChangeQty(qtyUser: any): void {
-    if (!this.productService.isProductExist(this.cartItem.product)) {
-      this.productService.addProduct(this.cartItem.product);
-    }
+    // if (!this.productService.isProductExist(this.cartItem.product)) {
+    //   this.productService.addProduct(this.cartItem.product);
+    // }
     
     this.productService.updateProductAmount(
       this.cartItem.product,

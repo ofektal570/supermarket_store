@@ -28,8 +28,9 @@ export class ProductListComponent implements OnInit {
     // }
 
     this.cartService.addProductToCart(product);
-    if (--product.amount === 0) {
-      this.productService.deleteProduct(product);
-    }
+    --product.amount === 0;
+    // if (--product.amount === 0) {
+      // this.productService.deleteProduct(product);
+    // }
   }
 }

@@ -2,7 +2,7 @@
   <mat-card-header>
     <div mat-card-avatar class="example-header-image"></div>
     <mat-card-title> <span class="title">Purchase made on: {{phrchasedCart.datePurchased}}</span></mat-card-title>
-    <mat-card-subtitle>Total price : {{phrchasedCart.totalPrice | currency: "USD"}}</mat-card-subtitle>
+    <mat-card-subtitle>Total price : {{phrchasedCart.totalPrice | currency: "USD"}} ({{delivery}})</mat-card-subtitle>
   </mat-card-header>
   <mat-icon (click)="expandMore = !expandMore">expand_more</mat-icon>
   <div *ngIf= "expandMore===true">

@@ -1,4 +1,4 @@
-<mat-expansion-panel hideToggle>
+<!-- <mat-expansion-panel hideToggle>
   <mat-expansion-panel-header>
     <mat-panel-title>
       {{ productToTrack.product.name }}
@@ -33,4 +33,27 @@
     </p>
   </div>
   <p id="total-changes">{{ productToTrack.productPrices.length }} Changes</p>
-</mat-expansion-panel>
+</mat-expansion-panel> -->
+<mat-card class="example-card">
+  <mat-card-header>
+    <div mat-card-avatar class="example-header-image"></div>
+    <mat-card-title> <span class="title">{{ productToTrack.product.name }}</span></mat-card-title>
+    <mat-card-subtitle>Total changes :{{ productToTrack.productPrices.length }}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-icon (click)="displayTable = !displayTable">expand_more</mat-icon>
+</mat-card>
+
+<table id="prices" *ngIf="displayTable">
+  <tr>
+    <th>Date</th>
+    <th>Price</th>
+    <th>New Price</th>
+    <th>Percentage Change</th>
+  </tr>
+  <tr *ngFor="let productPrice of productToTrack.productPrices">
+    <td>{{ productPrice.date }}</td>
+    <td>{{ productPrice.prevPrice | currency: "USD" }}</td>
+    <td>{{ productPrice.currPrice | currency: "USD" }}</td>
+    <td>{{ productPrice.precents }}%</td>
+  </tr>
+</table>

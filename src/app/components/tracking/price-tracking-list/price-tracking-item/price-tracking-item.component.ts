@@ -9,8 +9,8 @@ import { ProductTrackingPrices } from 'src/app/models/product-tracking-prices';
 export class PriceTrackingItemComponent implements OnInit {
   @Input() productToTrack: any;
   constructor() {}
-
+  displayTable = false;
+  
   ngOnInit(): void {
-    console.log(this.productToTrack.productPrices);
   }
 }

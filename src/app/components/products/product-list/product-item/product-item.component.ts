@@ -17,7 +17,7 @@ export class ProductItemComponent implements OnInit {
   ngOnInit(): void {
     this.calcChangePriceInPercent();
   }
-
+  
   calcChangePriceInPercent(): string {
     let precentsChange =
       ((this.productItem.prevPrice - this.productItem.currPrice) /

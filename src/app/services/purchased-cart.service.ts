@@ -15,9 +15,10 @@ export class PurchasedCartService {
 
   addPurchasedCart(
     purchasedProducts: PurchasedProduct[],
-    totalPrice: number
+    totalPrice: number,
+    delivery: number
   ): void {
-    this.purchasedCarts.push(new PurchasedCart(purchasedProducts, totalPrice));
+    this.purchasedCarts.push(new PurchasedCart(purchasedProducts, totalPrice, delivery));
     this.purchasedCartsListener.next(this.purchasedCarts);
   }
 
