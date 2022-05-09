@@ -10,7 +10,7 @@ export class ProductTrackingPrices {
   }[] = [];
 
   constructor(public product: Product) {
-    this.addNewTracking(product.prevPrice, product.currPrice);
+    this.addNewTracking(product.prev_price, product.curr_price);
   }
 
   addNewTracking(prevPrice: number, currPrice: number) {

@@ -32,7 +32,8 @@ export class ProductAddComponent implements OnInit {
       0,
       productForm.value.initPrice,
       productForm.value.initAmount,
-      imageUrl
+      imageUrl,
+      this.productService.getUniqueId()
     );
 
     this.productService.addProduct(newProduct);

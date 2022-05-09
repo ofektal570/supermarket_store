@@ -20,19 +20,23 @@ export class ProductEditComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.products = this.productService.getProducts();
+    this.productService.getProducts().subscribe((products) => {
+      console.log("this is the result from the get:", products);
+      this.products = products;
+    });
+    
     this.productService.listenProducts().subscribe((products: Product[]) => {
       this.products = products;
     });
   }
 
-  onDeleteProduct(productToDelete: Product) : void{
+  onDeleteProduct(productToDelete: Product): void {
     if (confirm("Are you sure to delete " + productToDelete.name + "?")) {
       this.productService.deleteProduct(productToDelete);
     }
   }
 
-  onUpdatePrice(productForm: NgForm, productToUpdatePrice: Product) : void{
+  onUpdatePrice(productForm: NgForm, productToUpdatePrice: Product): void {
     if (this.editMode === true && productForm.value.price !== "") {
       this.productService.updateProductPrice(
         productToUpdatePrice,

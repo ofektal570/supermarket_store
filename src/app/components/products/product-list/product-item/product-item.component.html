@@ -1,14 +1,14 @@
 <div class="d-flex justify-content-between p-3">
-  <p class="lead mb-0 title" *ngIf="productItem.prevPrice !== 0">
+  <p class="lead mb-0 title" *ngIf="productItem.prev_price !== 0">
     Price is changed by {{ calcChangePriceInPercent() }} %
   </p>
-  <p class="lead mb-0 title" *ngIf="productItem.prevPrice === 0">
+  <p class="lead mb-0 title" *ngIf="productItem.prev_price === 0">
     Price isn't changed yet
   </p>
 
   <small
     *ngIf="
-      productItem.currPrice - productItem.prevPrice !== 0 && productItem.prevPrice !== 0
+      productItem.curr_price - productItem.prev_price !== 0 && productItem.prev_price !== 0
     "
   >
     <mat-icon id="up-arrow" *ngIf="arrowDirection === 'up'">arrow_upward</mat-icon>
@@ -19,13 +19,13 @@
 <div class="card-body">
   <div class="d-flex justify-content-between mb-3">
     <h5 class="mb-0 ">{{ productItem.name }}</h5>
-    <h5 class="text-dark mb-0">{{ productItem.currPrice | currency: "USD" }}</h5>
+    <h5 class="text-dark mb-0">{{ productItem.curr_price | currency: "USD" }}</h5>
   </div>
 
   <div class="justify-content-between mb-2 align-right">
     <p class="small text-danger">
       <s [ngClass]="arrowDirection === 'up' ? 'opacity' : 'none'">
-        {{ productItem.prevPrice | currency: "USD" }}
+        {{ productItem.prev_price | currency: "USD" }}
       </s>
     </p>
   </div>

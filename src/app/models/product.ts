@@ -1,13 +1,10 @@
 export class Product {
-  private last_update: Date;
-
   constructor(
     public name: string,
-    public prevPrice: number,
-    public currPrice: number,
+    public prev_price: number,
+    public curr_price: number,
     public amount: number,
-    public image_url: string
-  ) {
-    this.last_update = new Date();
-  }
+    public image_url: string,
+    public product_id: number
+  ) {}
 }

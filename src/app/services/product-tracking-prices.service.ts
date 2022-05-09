@@ -21,7 +21,7 @@ export class ProductTrackingPricesService {
 
     for (let productTracking of this.productsTrackingPrices) {
       if (productTracking.product === product) {
-        productTracking.addNewTracking(product.prevPrice, product.currPrice);
+        productTracking.addNewTracking(product.prev_price, product.curr_price);
         isExist = true;
         break;
       }

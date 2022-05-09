@@ -35,7 +35,7 @@ export class CartListComponent implements OnInit {
   calcCartTotal() {
     this.cartTotal = 0;
     this.cartItems.forEach((item: CartItem) => {
-      this.cartTotal += item.qty * item.product.currPrice;
+      this.cartTotal += item.qty * item.product.curr_price;
     });
 
     if (this.delivery == 2) {
@@ -51,7 +51,7 @@ export class CartListComponent implements OnInit {
         new PurchasedProduct(
           cartItem.product.name,
           cartItem.qty,
-          cartItem.product.currPrice
+          cartItem.product.curr_price
         )
       );
     });

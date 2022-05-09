@@ -1,41 +1,22 @@
 import { Injectable } from "@angular/core";
 import { Observable, Subject } from "rxjs";
 import { Product } from "../models/product";
+import { productsUrl } from "../config/api";
+import { HttpClient } from "@angular/common/http";
 
 @Injectable({
   providedIn: "root",
 })
 export class ProductService {
   private productsListener = new Subject<Product[]>();
+  private counterId = 4;
 
-  products: Product[] = [
-    new Product(
-      "Pizza",
-      0,
-      10,
-      3,
-      "https://media-cdn.tripadvisor.com/media/photo-s/1b/b5/0e/a5/pizza-hut-belfield.jpg"
-    ),
-    new Product(
-      "Hamburger",
-      50,
-      35,
-      6,
-      "https://upload.wikimedia.org/wikipedia/commons/4/47/Hamburger_%28black_bg%29.jpg"
-    ),
-    new Product(
-      "Stake",
-      40,
-      75,
-      2,
-      "https://thumbs.dreamstime.com/b/food-beef-dinner-main-course-grilled-stake-food-beef-dinner-main-course-delicious-grilled-stake-cutting-board-107147069.jpg"
-    ),
-  ];
+  products: Product[] = [];
 
-  constructor() {}
+  constructor(private http:HttpClient) {}
 
-  getProducts(): Product[] {
-    return this.products;
+  getProducts(): Observable<Product[]> {
+    return this.http.get<Product[]>(productsUrl);
   }
 
   listenProducts(): Observable<Product[]> {
@@ -58,8 +39,8 @@ export class ProductService {
   }
 
   updateProductPrice(product: Product, newPrice: number) {
-    product.prevPrice = product.currPrice;
-    product.currPrice = newPrice;
+    product.prev_price = product.curr_price;
+    product.curr_price = newPrice;
     this.productsListener.next(this.products);
   }
 
@@ -69,5 +50,9 @@ export class ProductService {
   updateProductAmount(product: Product, newAmount: number): void {
     product.amount = newAmount;
     this.productsListener.next(this.products);
+  }
+  
+  getUniqueId(): number {
+      return ++this.counterId;
   }
 }

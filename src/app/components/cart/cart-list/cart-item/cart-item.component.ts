@@ -9,8 +9,9 @@ import { ProductService } from "src/app/services/product.service";
   templateUrl: "./cart-item.component.html",
   styleUrls: ["./cart-item.component.css"],
 })
+  
 export class CartItemComponent implements OnInit {
-  @Input() cartItem: CartItem = new CartItem(new Product("dummy", 0, 1, 1, ""));
+  @Input() cartItem: CartItem = new CartItem(new Product("dummy", 0, 1, 1, "", 0));
   firstAmountItem = 0;
 
   constructor(private productService: ProductService, private cartService: CartService) {}
