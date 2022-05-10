@@ -46,15 +46,30 @@ router.delete("/:product_id", async (req, res) => {
   }
 });
 
+router.delete("/", async (req, res) => {
+  try {
+    products.destroy({
+      where: {},
+      truncate: true,
+    });
+
+    return res.json({ msg: "clear" });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({ error: "something went wrong" });
+  }
+});
+
+
 router.put("/", async (req, res) => {
   try {
     const { product_id, new_price } = req.body;
-
     const productToUpdate = await products.findOne({ where: { product_id } });
     
     productToUpdate.prev_price = productToUpdate.curr_price;
     productToUpdate.curr_price = parseInt(new_price);
-
+    
+    console.log('produt to update is ', productToUpdate);
     await productToUpdate.save();
 
     return res.json(productToUpdate);
