@@ -70,7 +70,6 @@ router.put("/", async (req, res) => {
     productToUpdate.prev_price = productToUpdate.curr_price;
     productToUpdate.curr_price = parseInt(new_price);
     
-    console.log('produt to update is ', productToUpdate);
     await productToUpdate.save();
 
     return res.json(productToUpdate);
