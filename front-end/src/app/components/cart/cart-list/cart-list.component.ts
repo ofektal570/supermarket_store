@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, HostListener, OnInit } from "@angular/core";
 import { CartItem } from "src/app/models/cart-item";
 import { PurchasedProduct } from "src/app/models/purchased-product";
 import { CartService } from "src/app/services/cart.service";
@@ -12,22 +12,34 @@ import { NgForm } from "@angular/forms";
   styleUrls: ["./cart-list.component.css"],
 })
 export class CartListComponent implements OnInit {
-  cartItems: CartItem[] = [];
+  cartItems: CartItem[] = this.cartService.getCartItems();
   cartTotal = 0;
-  delivery: number = 1;
+  deliveryType: number = this.cartService.getDeliveryOption();
 
   constructor(
     private cartService: CartService,
     private purchasedCartService: PurchasedCartService,
     private productService: ProductService
   ) {}
+  // // myValue = "is it work??";
 
+  // // // call this event handler before browser refresh
+  // @HostListener("window:beforeunload", ["$event"]) unloadHandler(event: Event) {
+  //   // console.log("Processing beforeunload...", this.myValue);
+  //   this.saveCart();
+  // }
+
+  // // // execute this function before browser refresh
+  // saveCart():void {
+  //   this.cartService.saveCart();
+  // }
+  
   ngOnInit(): void {
-    this.cartItems = this.cartService.getCartItems();
     this.calcCartTotal();
 
     this.cartService.listenCartItems().subscribe((cartItems: CartItem[]) => {
       this.cartItems = cartItems;
+      this.deliveryType = this.cartService.getDeliveryOption();
       this.calcCartTotal();
     });
   }
@@ -38,7 +50,7 @@ export class CartListComponent implements OnInit {
       this.cartTotal += item.qty * item.product.curr_price;
     });
 
-    if (this.delivery == 2) {
+    if (this.deliveryType == 2) {
       this.cartTotal += 5;
     }
   }
@@ -59,7 +71,7 @@ export class CartListComponent implements OnInit {
     this.purchasedCartService.addPurchasedCart(
       purchasedProducts,
       this.cartTotal,
-      this.delivery
+      this.deliveryType
     );
     this.cartService.emptyCart();
     alert("Thank you for buying");
@@ -78,8 +90,9 @@ export class CartListComponent implements OnInit {
   }
 
   deliveryOption(event: any): void {
-    this.delivery = event.target.value;
+    this.deliveryType = event.target.value;
     this.calcCartTotal();
+    this.cartService.setDeliveryOption(this.deliveryType);
   }
 
   couponApply(couponInput: NgForm) {

@@ -1,7 +1,8 @@
-import { Injectable } from "@angular/core";
+import { HostListener, Injectable, OnDestroy, OnInit } from "@angular/core";
 import { Observable, Subject } from "rxjs";
 import { CartItem } from "../models/cart-item";
 import { Product } from "../models/product";
+import { cartUrl } from "../config/api";
 
 @Injectable({
   providedIn: "root",
@@ -9,8 +10,47 @@ import { Product } from "../models/product";
 export class CartService {
   private cartItems: CartItem[] = [];
   private cartItemsListener = new Subject<CartItem[]>();
+  private deliveryType = 1;
 
-  constructor() {}
+  constructor() {
+    // this.http.get(cartUrl).subscribe((cartItems) => {
+    //   this.initCartItems(cartItems);
+    // });
+  }
+
+  // saveCart() {
+  //   let productsIdArr: number[] = [];
+  //   let qtyArr: number[] = [];
+  //   let deliveryOption = this.deliveryType == 2 ? 'delivery' : 'take-away';
+
+  //   this.cartItems.forEach((cartItem) => {
+  //     productsIdArr.push(cartItem.product.product_id);
+  //     qtyArr.push(cartItem.qty);
+  //   });
+
+  //   this.http
+  //     .put(cartUrl, {
+  //       product_id: productsIdArr,
+  //       qty: qtyArr,
+  //       delivery_option: deliveryOption,
+  //     })
+  //     .subscribe((cartItems) => {
+  //       console.log("did it");
+  //     });
+  // }
+
+  initCartItems(cartItems: any): void {
+    // console.log('SSSSSSSSSSSSSSSSSSSSS',cartItems);
+    const productsArr = cartItems.productsArr;
+    const qtyArr = cartItems.qty;
+
+    for (let i = 0; i < productsArr.length; i++) {
+      this.cartItems.push(new CartItem(productsArr[i], qtyArr[i]));
+    }
+
+    this.deliveryType = cartItems.delivery_option === "delivery" ? 2 : 1;
+    this.cartItemsListener.next(this.cartItems);
+  }
 
   getCartItems(): CartItem[] {
     return this.cartItems;
@@ -50,5 +90,13 @@ export class CartService {
 
   calcCartTotal(): void {
     this.cartItemsListener.next(this.cartItems);
+  }
+
+  setDeliveryOption(delivery_option: number): void {
+    this.deliveryType = delivery_option;
+  }
+
+  getDeliveryOption(): number {
+    return this.deliveryType;
   }
 }

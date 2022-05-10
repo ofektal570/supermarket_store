@@ -20,25 +20,26 @@ export class ProductEditComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    if (this.productService.isInitialized()) {
-      this.products = this.productService.initProducts();      
-    } else {
-      this.loadProducts();
-    }
-  
-    this.productService.listenProducts().subscribe((product: Product) => {
-      this.loadProducts();
-    });
-  }
-
-  loadProducts():void {
-    this.productService.getProducts().subscribe((products) => {
+    // if (this.productService.isInitialized()) {
+    //   this.products = this.productService.initProducts();      
+    // } else {
+    //   this.loadProducts();
+    // }
+    this.products = this.productService.getProducts();
+    this.productService.listenProducts().subscribe((products: Product[]) => {
       this.products = products;
     });
   }
+
+  // loadProducts():void {
+  //   this.productService.getProducts().subscribe((products) => {
+  //     this.products = products;
+  //   });
+  // }
   
   onDeleteProduct(productToDelete: Product): void {
     if (confirm("Are you sure to delete " + productToDelete.name + "?")) {
+      console.log('im here');
       this.productService.deleteProduct(productToDelete);
     }
   }

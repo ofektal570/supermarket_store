@@ -14,22 +14,22 @@ export class ProductListComponent implements OnInit {
   constructor(private productService: ProductService, private cartService: CartService) {}
 
   ngOnInit(): void {
-    if (this.productService.isInitialized()) {
-      this.products = this.productService.initProducts();
-    } else {
-      this.loadProducts();
-    }
-
-    this.productService.listenProducts().subscribe((products: Product) => {
-      this.loadProducts();
-    });
-  }
-
-  loadProducts() {
-    this.productService.getProducts().subscribe((products) => {
+    // if (this.productService.isInitialized()) {
+    //   this.products = this.productService.initProducts();
+    // } else {
+    //   this.loadProducts();
+    // }
+    this.products = this.productService.getProducts();
+    this.productService.listenProducts().subscribe((products: Product[]) => {
       this.products = products;
     });
   }
+
+  // loadProducts() {
+  //   this.productService.getProducts().subscribe((products) => {
+  //     this.products = products;
+  //   });
+  // }
   addToCart(product: Product): void {
     this.cartService.addProductToCart(product);
     --product.amount;

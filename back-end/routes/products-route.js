@@ -36,7 +36,8 @@ router.delete("/:product_id", async (req, res) => {
   try {
     const { product_id } = req.params;
     const productToDestroy = await products.findOne({ where: { product_id } });
-
+    
+    console.log('look!!!!' ,product_id);
     await productToDestroy.destroy();
 
     return res.json({ msg: "product deleted!" });

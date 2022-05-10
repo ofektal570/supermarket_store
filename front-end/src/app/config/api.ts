@@ -6,6 +6,7 @@ export const baseUrl = environment.production
   : "http://localhost:3000";
 export const adminsUrl = baseUrl + "/admins";
 export const productsUrl = baseUrl + "/products";
+export const cartUrl = baseUrl + "/cart";
 
 export function getUrlToDeleteProduct(product: Product): string {
   return productsUrl + "/" + product.product_id;

@@ -39,13 +39,10 @@ export class CartItemComponent implements OnInit {
         );
       }
 
-      if (!this.productService.isProductExist(this.cartItem.product)) {
-        this.productService.addProduct(this.cartItem.product);
-      }
-
       if (0 === this.cartItem.qty) {
         this.cartService.removeProductFromCart(this.cartItem.product);
       }
+      
       --this.cartItem.qty;
       this.cartService.calcCartTotal();
     }
