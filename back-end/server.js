@@ -3,6 +3,7 @@ const { sequelize } = require("./models");
 const adminsRoute = require("./routes/admins-route");
 const productsRoute = require("./routes/products-route");
 const cartRoute = require("./routes/cart-route");
+const pricesRoute = require("./routes/prices-route");
 
 const app = express();
 let port = 3000;
@@ -22,8 +23,8 @@ app.use((req, res, next) => {
 app.use('/admins', adminsRoute);
 app.use("/products", productsRoute);
 app.use("/cart", cartRoute);
+app.use("/prices", pricesRoute);
 
-//common
 app.listen({ port }, async () => {
   console.log("Server Listening to port ", port);
   try {

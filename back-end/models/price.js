@@ -3,7 +3,7 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class cart extends Model {
+  class price extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -14,16 +14,22 @@ module.exports = (sequelize, DataTypes) => {
     }
 
     toJSON() {
-      return { ...this.get(), id: undefined, createdAt: undefined, updatedAt: undefined };
+      return {
+        ...this.get(),
+        id: undefined,
+        createdAt: undefined,
+        updatedAt: undefined,
+      };
     }
   }
-  cart.init({
-    product_id: DataTypes.ARRAY(DataTypes.REAL),
-    qty: DataTypes.ARRAY(DataTypes.REAL),
-    delivery_option: DataTypes.STRING
+  price.init({
+    product_id: DataTypes.REAL,
+    prices: DataTypes.ARRAY(DataTypes.DOUBLE),
+    dates: DataTypes.ARRAY(DataTypes.DATE)
   }, {
     sequelize,
-    modelName: 'cart',
+    modelName: 'price',
+    // tableName: 'prices'
   });
-  return cart;
+  return price;
 };

@@ -59,6 +59,7 @@ router.put("/", async (req, res) => {
     return res.status(500).json({ error: "something went wrong" });
   }
 });
+module.exports = router;
 
 // router.delete("/", async (req, res) => {
 //   try {
@@ -114,4 +115,3 @@ router.put("/", async (req, res) => {
 //   }
 // });
 
-module.exports = router;
