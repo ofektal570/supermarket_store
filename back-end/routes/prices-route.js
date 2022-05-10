@@ -19,7 +19,7 @@ router.get("/", async (req, res) => {
     // pricesArr[names] = productsName;
     return res.json({
       names: productsName,
-      prices: pricesArr
+      prices : pricesArr
     });
   } catch (err) {
     console.log(err);

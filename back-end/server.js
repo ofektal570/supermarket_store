@@ -4,6 +4,7 @@ const adminsRoute = require("./routes/admins-route");
 const productsRoute = require("./routes/products-route");
 const cartRoute = require("./routes/cart-route");
 const pricesRoute = require("./routes/prices-route");
+const ordersRoute = require("./routes/orders-route");
 
 const app = express();
 let port = 3000;
@@ -24,6 +25,7 @@ app.use('/admins', adminsRoute);
 app.use("/products", productsRoute);
 app.use("/cart", cartRoute);
 app.use("/prices", pricesRoute);
+app.use("/orders", ordersRoute);
 
 app.listen({ port }, async () => {
   console.log("Server Listening to port ", port);
