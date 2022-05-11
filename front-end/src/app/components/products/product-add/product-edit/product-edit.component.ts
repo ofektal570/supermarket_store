@@ -58,11 +58,50 @@ export class ProductEditComponent implements OnInit {
       let newPrice = productForm.value.price;
       this.productService.updateProductPrice(productToUpdatePrice, newPrice);
 
-      this.productTrackingPricesService.updateProductPrices(productToUpdatePrice.product_id, currPrice, newPrice);
+      this.productTrackingPricesService.updateProductPrices(
+        productToUpdatePrice.product_id,
+        currPrice,
+        newPrice
+      );
     }
 
     this.editMode = !this.editMode;
     this.editedProduct = productToUpdatePrice;
     productForm.resetForm();
+  }
+
+  DefaultValues() {
+    setTimeout(() => {
+      this.productService.addProduct(
+        new Product(
+          "Hamburger",
+          0,
+          10,
+          5,
+          "https://upload.wikimedia.org/wikipedia/commons/4/47/Hamburger_%28black_bg%29.jpg"
+        )
+      );
+    }, 1000);
+
+    setTimeout(() => {
+      this.productService.addProduct(
+        new Product(
+          "Hot Dog",
+          10,
+          50,
+          10,
+          "https://media.wired.com/photos/5b3ac89dc002fe17d01df63d/master/w_2560%2Cc_limit/VegHotDog-80489177w.jpg"
+        )
+      );
+    }, 2000);
+    this.productService.addProduct(
+      new Product(
+        "Pizza",
+        5,
+        3,
+        2,
+        "https://static.toiimg.com/thumb/56933159.cms?imgsize=686279&width=800&height=800"
+      )
+    );
   }
 }

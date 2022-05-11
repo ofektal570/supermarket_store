@@ -15,7 +15,7 @@
     <input
       id="form1"
       min="0"
-      [max]="firstAmountItem"
+      [max]="cartItem.product.amount + cartItem.qty"
       name="quantity"
       [value]="cartItem.qty"
       type="number"

@@ -120,7 +120,8 @@ router.delete("/:product_id", async (req, res) => {
     
     cartDetails.qty = tempQtyArr.concat([]);
     cartDetails.product_id = tempIdArr.concat([]);
-
+    
+    console.log('CART_IDS:', cartDetails.product_id, 'CART_QTYS', cartDetails.qty);
     await cartDetails.save();
 
     return res.json({ msg: "product removed" });

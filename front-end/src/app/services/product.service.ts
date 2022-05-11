@@ -9,6 +9,7 @@ import {
   getUniqueIdUrl,
 } from "../config/api";
 import { HttpClient } from "@angular/common/http";
+import { CartService } from "./cart.service";
 
 @Injectable({
   providedIn: "root",
@@ -16,34 +17,9 @@ import { HttpClient } from "@angular/common/http";
 export class ProductService {
   private productsListener = new Subject<Product[]>();
   private loaded = false;
-  products: Product[] = [
-    new Product(
-      "Hamburger",
-      0,
-      10,
-      5,
-      "https://upload.wikimedia.org/wikipedia/commons/4/47/Hamburger_%28black_bg%29.jpg",
-      1
-    ),
-    new Product(
-      "Pizza",
-      5,
-      3,
-      2,
-      "https://static.toiimg.com/thumb/56933159.cms?imgsize=686279&width=800&height=800",
-      2
-    ),
-    new Product(
-      "Hot Dog",
-      10,
-      50,
-      10,
-      "https://media.wired.com/photos/5b3ac89dc002fe17d01df63d/master/w_2560%2Cc_limit/VegHotDog-80489177w.jpg",
-      3
-    ),
-  ];
+  products: Product[] = [];
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private cartService: CartService) {
     // this.getProducts().subscribe((products) => {
     //   this.products = products;
     //   this.loaded = true;
@@ -53,8 +29,10 @@ export class ProductService {
 
   loadProducts(): Product[] {
     this.http.get(productsUrl).subscribe((products) => {
-      
       this.initProducts(products);
+      this.products.sort((product1: Product, product2: Product) => {
+        return product1.product_id - product2.product_id;
+      });
       this.productsListener.next(this.products);
     });
     return this.products;
@@ -90,21 +68,22 @@ export class ProductService {
   // const { name, prev_price, curr_price, amount, image_url, product_id } = req.body;
 
   addProduct(product: Product): void {
+    console.log("THATS NOW ME!!", product.product_id);
     this.http.get(getUniqueIdUrl).subscribe((unique_id) => {
-       this.http
-         .post(productsUrl, {
-           name: product.name,
-           prev_price: product.prev_price,
-           curr_price: product.curr_price,
-           amount: product.amount,
-           image_url: product.image_url,
-           product_id: unique_id,
-         })
-         .subscribe(() => {
-           this.loadProducts();
-         });
-    })
-   
+      this.http
+        .post(productsUrl, {
+          name: product.name,
+          prev_price: product.prev_price,
+          curr_price: product.curr_price,
+          amount: product.amount,
+          image_url: product.image_url,
+          product_id: unique_id,
+        })
+        .subscribe(() => {
+          this.loadProducts();
+        });
+    });
+
     // this.products.push(product);
 
     // this.productsListener.next(this.products);
@@ -137,6 +116,7 @@ export class ProductService {
     this.http.delete(getUrlToDeleteProduct(productToDelete)).subscribe(() => {
       this.loadProducts();
     });
+    this.cartService.removeProductFromCart(productToDelete);
   }
 
   getNumOfProducts(): number {
@@ -161,6 +141,7 @@ export class ProductService {
   updateProductAmount(product: Product, newAmount: number): void {
     // product.amount = newAmount;
     // this.productsListener.next(this.products);
+    console.log("THIS IS THE PRODUCT:", product, newAmount);
     this.http
       .put(updateAmountUrl, {
         product_id: product.product_id,
@@ -169,12 +150,5 @@ export class ProductService {
       .subscribe(() => {
         this.loadProducts();
       });
-  }
-
-  getUniqueId(product_name: string): number {
-    console.log('look:',typeof product_name);
-    console.log(parseInt(product_name));
-    
-    return parseInt(product_name);
   }
 }

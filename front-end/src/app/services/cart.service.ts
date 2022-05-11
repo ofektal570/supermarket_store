@@ -2,7 +2,12 @@ import { HostListener, Injectable, OnDestroy, OnInit } from "@angular/core";
 import { Observable, Subject } from "rxjs";
 import { CartItem } from "../models/cart-item";
 import { Product } from "../models/product";
-import { cartUrl, updateQtyUrl, updateDeliveryUrl, getUrlToDeleteProduct } from "../config/api";
+import {
+  cartUrl,
+  updateQtyUrl,
+  updateDeliveryUrl,
+  getUrlToReturnProduct,
+} from "../config/api";
 import { HttpClient } from "@angular/common/http";
 
 @Injectable({
@@ -80,24 +85,24 @@ export class CartService {
   addProductToCart(product: Product): void {
     let isExists = false;
     let currQty = 0;
-    
-    console.log('YEAH IM HERE ADDING!!');
+
+    console.log("YEAH IM HERE ADDING!!");
     for (let cartItem of this.cartItems) {
       if (cartItem.product.product_id === product.product_id) {
         isExists = true;
         currQty = cartItem.qty++;
-    console.log("YEAH IM HERE EXIST1!!");
-        
+        console.log("YEAH IM HERE EXIST1!!");
+
         break;
-        
       }
     }
 
     if (!isExists) {
+      console.log('LETS SEE!!!',product);
       this.addProductToDB(product.product_id, 1);
     } else {
-    console.log("YEAH IM HERE EXIST2!!");
-      
+      console.log("YEAH IM HERE EXIST2!!");
+
       this.updateQtyInDB(product.product_id, currQty + 1);
     }
 
@@ -106,7 +111,7 @@ export class CartService {
 
   updateQtyInDB(product_id: number, qty: number): void {
     console.log("What is the qty?", qty);
-    
+
     this.http
       .put(updateQtyUrl, {
         product_id,
@@ -133,7 +138,7 @@ export class CartService {
     //   (cartItem: CartItem) => cartItem.product !== product
     // );
     // this.cartItemsListener.next(this.cartItems);
-    this.http.delete(getUrlToDeleteProduct(product)).subscribe(() => {
+    this.http.delete(getUrlToReturnProduct(product)).subscribe(() => {
       this.loadCartItems();
     });
   }

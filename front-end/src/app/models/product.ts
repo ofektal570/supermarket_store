@@ -5,6 +5,6 @@ export class Product {
     public curr_price: number,
     public amount: number,
     public image_url: string,
-    public product_id: number
+    public product_id: number = 1
   ) {}
 }
