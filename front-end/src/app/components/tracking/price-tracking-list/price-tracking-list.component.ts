@@ -13,11 +13,11 @@ export class PriceTrackingListComponent implements OnInit {
   constructor(private productTrackingPricesService: ProductTrackingPricesService) {}
 
   ngOnInit(): void {
-    this.productsTrackingPrices =
-      this.productTrackingPricesService.getProductsTrackingPrices();
+    this.productTrackingPricesService.loadProductsTrackingPrices();
     this.productTrackingPricesService
       .listenProductTrackingPrices()
       .subscribe((productsTrackingPrices: ProductTrackingPrices[]) => {
+        console.log("i got next, this is the res:", productsTrackingPrices);
         this.productsTrackingPrices = productsTrackingPrices;
       });
   }

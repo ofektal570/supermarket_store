@@ -2,6 +2,8 @@ import { Injectable } from "@angular/core";
 import { Observable, Subject } from "rxjs";
 import { Product } from "../models/product";
 import { ProductTrackingPrices } from "../models/product-tracking-prices";
+import { pricesUrl } from "../config/api";
+import { HttpClient } from "@angular/common/http";
 
 @Injectable({
   providedIn: "root",
@@ -10,26 +12,53 @@ export class ProductTrackingPricesService {
   private productsTrackingPricesListener = new Subject<ProductTrackingPrices[]>();
   private productsTrackingPrices: ProductTrackingPrices[] = [];
 
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
-  getProductsTrackingPrices(): ProductTrackingPrices[] {
-    return this.productsTrackingPrices;
+  // getProductsTrackingPrices(): ProductTrackingPrices[] {
+  //   this.loadProductsTrackingPrices();
+
+  //   return this.productsTrackingPrices;
+  // }
+
+  loadProductsTrackingPrices(): void {
+    this.http.get(pricesUrl).subscribe((pricesSummary) => {
+      console.log('get it!');
+      this.initProductsTrackingPrices(pricesSummary);
+    });
   }
-
-  updateProductPrices(product: Product): void {
-    let isExist = false;
-
-    for (let productTracking of this.productsTrackingPrices) {
-      if (productTracking.product === product) {
-        productTracking.addNewTracking(product.prev_price, product.curr_price);
-        isExist = true;
-        break;
-      }
-    }
-    if (!isExist) {
-      this.productsTrackingPrices.push(new ProductTrackingPrices(product));
+  initProductsTrackingPrices(pricesSummary: any) {
+    this.productsTrackingPrices = [];
+    console.log("look", pricesSummary);
+    for (let i = 0; i < pricesSummary.names.length; i++) {
+      this.productsTrackingPrices.push(
+        new ProductTrackingPrices(pricesSummary.names[i], pricesSummary.prices[i])
+      );
     }
     this.productsTrackingPricesListener.next(this.productsTrackingPrices);
+  }
+  // const {product_id, prev_price, curr_price} = req.body;
+
+  updateProductPrices(product: Product): void {
+    // for (let productTracking of this.productsTrackingPrices) {
+    //   if (productTracking.product === product) {
+    //     productTracking.addNewTracking(product.prev_price, product.curr_price);
+    //     isExist = true;
+    //     break;
+    //   }
+    // }
+    // if (!isExist) {
+    //   this.productsTrackingPrices.push(new ProductTrackingPrices(product));
+    // }
+    this.http
+      .post(pricesUrl, {
+        product_id: product.product_id,
+        prev_price: product.prev_price,
+        curr_price: product.curr_price,
+      })
+      .subscribe(() => {
+        this.loadProductsTrackingPrices();
+      });
+    // this.productsTrackingPricesListener.next(this.productsTrackingPrices);
   }
 
   listenProductTrackingPrices(): Observable<ProductTrackingPrices[]> {
