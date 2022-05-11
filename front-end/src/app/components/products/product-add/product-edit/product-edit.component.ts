@@ -21,11 +21,11 @@ export class ProductEditComponent implements OnInit {
 
   ngOnInit(): void {
     // if (this.productService.isInitialized()) {
-    //   this.products = this.productService.initProducts();      
+    //   this.products = this.productService.initProducts();
     // } else {
     //   this.loadProducts();
     // }
-    this.products = this.productService.getProducts();
+    this.products = this.productService.loadProducts();
     this.productService.listenProducts().subscribe((products: Product[]) => {
       this.products = products;
     });
@@ -36,22 +36,29 @@ export class ProductEditComponent implements OnInit {
   //     this.products = products;
   //   });
   // }
-  
+
   onDeleteProduct(productToDelete: Product): void {
     if (confirm("Are you sure to delete " + productToDelete.name + "?")) {
-      console.log('im here');
+      console.log("im here");
       this.productService.deleteProduct(productToDelete);
     }
   }
 
-  onUpdatePrice(productForm: NgForm, productToUpdatePrice: Product): void {
-    if (this.editMode === true && productForm.value.price !== "") {
-      this.productService.updateProductPrice(
-        productToUpdatePrice,
-        productForm.value.price
-      );
+  isPriceValid(price: string): boolean {
+    return price !== "" && typeof price !== "undefined";
+  }
 
-      this.productTrackingPricesService.updateProductPrices(productToUpdatePrice);
+  onUpdatePrice(productForm: NgForm, productToUpdatePrice: Product): void {
+    if (
+      this.editMode === true &&
+      this.isPriceValid(productForm.value.price) &&
+      productForm.value.price !== productToUpdatePrice.curr_price
+    ) {
+      let currPrice = productToUpdatePrice.curr_price;
+      let newPrice = productForm.value.price;
+      this.productService.updateProductPrice(productToUpdatePrice, newPrice);
+
+      this.productTrackingPricesService.updateProductPrices(productToUpdatePrice.product_id, currPrice, newPrice);
     }
 
     this.editMode = !this.editMode;

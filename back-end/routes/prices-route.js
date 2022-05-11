@@ -7,15 +7,13 @@ router.get("/", async (req, res) => {
   try {
     const pricesArr = await price.findAll();
     let productsName = [];    
-    
+    // console.log(pricesArr);
     for(let item of pricesArr) {
       const product_id = item.product_id;
       const product = await products.findOne({ where: { product_id } });
-      
       productsName.push(product.name);
     }
     
-    console.log(productsName);
     // pricesArr[names] = productsName;
     return res.json({
       names: productsName,
@@ -52,10 +50,10 @@ router.post("/", async (req, res) => {
       await productTracked.save();     
     }
     
-    res.json(productTracked);
+    return res.json(productTracked);
   }catch (err){
     console.log(err);
-    res.json({ error: "something went wrong!!" });  
+    return res.json({ error: "something went wrong!!" });  
   }
 });
 
@@ -67,6 +65,20 @@ router.delete("/:product_id", async (req, res) => {
     await productTracked.destroy();
     
     return res.json('deleted');
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({ error: "something went wrong!!" });
+  }
+});
+
+router.delete('/', async (req, res) => {
+  try {
+     price.destroy({
+       where: {},
+       truncate: true,
+     });
+    
+    return res.json('cleard');
   } catch (err) {
     console.log(err);
     return res.status(500).json({ error: "something went wrong!!" });

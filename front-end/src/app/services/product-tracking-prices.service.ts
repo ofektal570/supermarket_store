@@ -22,13 +22,11 @@ export class ProductTrackingPricesService {
 
   loadProductsTrackingPrices(): void {
     this.http.get(pricesUrl).subscribe((pricesSummary) => {
-      console.log('get it!');
       this.initProductsTrackingPrices(pricesSummary);
     });
   }
   initProductsTrackingPrices(pricesSummary: any) {
     this.productsTrackingPrices = [];
-    console.log("look", pricesSummary);
     for (let i = 0; i < pricesSummary.names.length; i++) {
       this.productsTrackingPrices.push(
         new ProductTrackingPrices(pricesSummary.names[i], pricesSummary.prices[i])
@@ -38,7 +36,7 @@ export class ProductTrackingPricesService {
   }
   // const {product_id, prev_price, curr_price} = req.body;
 
-  updateProductPrices(product: Product): void {
+  updateProductPrices(product_id: number, prev_price: number, curr_price: number): void {
     // for (let productTracking of this.productsTrackingPrices) {
     //   if (productTracking.product === product) {
     //     productTracking.addNewTracking(product.prev_price, product.curr_price);
@@ -51,9 +49,9 @@ export class ProductTrackingPricesService {
     // }
     this.http
       .post(pricesUrl, {
-        product_id: product.product_id,
-        prev_price: product.prev_price,
-        curr_price: product.curr_price,
+        product_id,
+        prev_price,
+        curr_price
       })
       .subscribe(() => {
         this.loadProductsTrackingPrices();

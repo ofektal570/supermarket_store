@@ -1,14 +1,20 @@
 import { Injectable } from "@angular/core";
 import { Observable, Subject } from "rxjs";
 import { Product } from "../models/product";
-import { productsUrl, getUrlToDeleteProduct } from "../config/api";
+import {
+  productsUrl,
+  getUrlToDeleteProduct,
+  updatePriceUrl,
+  updateAmountUrl,
+  getUniqueIdUrl,
+} from "../config/api";
+import { HttpClient } from "@angular/common/http";
 
 @Injectable({
   providedIn: "root",
 })
 export class ProductService {
   private productsListener = new Subject<Product[]>();
-  private counterId = 4;
   private loaded = false;
   products: Product[] = [
     new Product(
@@ -37,7 +43,7 @@ export class ProductService {
     ),
   ];
 
-  constructor() {
+  constructor(private http: HttpClient) {
     // this.getProducts().subscribe((products) => {
     //   this.products = products;
     //   this.loaded = true;
@@ -45,23 +51,63 @@ export class ProductService {
     // });
   }
 
-  getProducts(): Product[] {
+  loadProducts(): Product[] {
+    this.http.get(productsUrl).subscribe((products) => {
+      
+      this.initProducts(products);
+      this.productsListener.next(this.products);
+    });
     return this.products;
   }
-  isInitialized() {
-    return this.loaded;
-  }
+  // isInitialized() {
+  //   return this.loaded;
+  // }
   // getProducts(): Observable<Product[]> {
   //   return this.http.get<Product[]>(productsUrl);
   // }
+
+  initProducts(products: any): void {
+    this.products = [];
+
+    products.forEach((product: any) => {
+      this.products.push(
+        new Product(
+          product.name,
+          product.prev_price,
+          product.curr_price,
+          product.amount,
+          product.image_url,
+          product.product_id
+        )
+      );
+    });
+  }
 
   listenProducts(): Observable<Product[]> {
     return this.productsListener.asObservable();
   }
 
+  // const { name, prev_price, curr_price, amount, image_url, product_id } = req.body;
+
   addProduct(product: Product): void {
-    this.products.push(product);
-    this.productsListener.next(this.products);
+    this.http.get(getUniqueIdUrl).subscribe((unique_id) => {
+       this.http
+         .post(productsUrl, {
+           name: product.name,
+           prev_price: product.prev_price,
+           curr_price: product.curr_price,
+           amount: product.amount,
+           image_url: product.image_url,
+           product_id: unique_id,
+         })
+         .subscribe(() => {
+           this.loadProducts();
+         });
+    })
+   
+    // this.products.push(product);
+
+    // this.productsListener.next(this.products);
     // this.http
     //   .post(productsUrl, {
     //     name: product.name,
@@ -78,42 +124,57 @@ export class ProductService {
 
   deleteProduct(productToDelete: Product): void {
     // console.log("im here in Service");
-
     // this.products = this.products.filter((product: Product) => {
     //   console.log("PRODUCT :", productToDelete, "proudct :", product);
     //   product.product_id !== productToDelete.product_id;
     // });
-    for (let i = 0; i < this.products.length; i++) {
-      if (this.products[i] === productToDelete) {
-        this.products.splice(i, 1);
-      }
-    }
-    this.productsListener.next(this.products);
+    // for (let i = 0; i < this.products.length; i++) {
+    //   if (this.products[i] === productToDelete) {
+    //     this.products.splice(i, 1);
+    //   }
+    // }
 
-    // this.http.delete(getUrlToDeleteProduct(productToDelete)).subscribe(() => {
-    //   console.log('i did it men');
-    // });
+    this.http.delete(getUrlToDeleteProduct(productToDelete)).subscribe(() => {
+      this.loadProducts();
+    });
   }
 
   getNumOfProducts(): number {
     return this.products.length;
   }
 
+  // const { product_id, new_price } = req.body;
   updateProductPrice(product: Product, newPrice: number) {
-    product.prev_price = product.curr_price;
-    product.curr_price = newPrice;
+    // product.prev_price = product.curr_price;
+    // product.curr_price = newPrice;
     // this.productsListener.next(this.products);
+    this.http
+      .put(updatePriceUrl, {
+        product_id: product.product_id,
+        new_price: newPrice,
+      })
+      .subscribe(() => {
+        this.loadProducts();
+      });
   }
 
-  isProductExist(product: Product): boolean {
-    return this.products.includes(product);
-  }
   updateProductAmount(product: Product, newAmount: number): void {
-    product.amount = newAmount;
+    // product.amount = newAmount;
     // this.productsListener.next(this.products);
+    this.http
+      .put(updateAmountUrl, {
+        product_id: product.product_id,
+        new_amount: newAmount,
+      })
+      .subscribe(() => {
+        this.loadProducts();
+      });
   }
 
-  getUniqueId(): number {
-    return this.counterId++;
+  getUniqueId(product_name: string): number {
+    console.log('look:',typeof product_name);
+    console.log(parseInt(product_name));
+    
+    return parseInt(product_name);
   }
 }

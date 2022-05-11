@@ -17,7 +17,6 @@ export class PriceTrackingListComponent implements OnInit {
     this.productTrackingPricesService
       .listenProductTrackingPrices()
       .subscribe((productsTrackingPrices: ProductTrackingPrices[]) => {
-        console.log("i got next, this is the res:", productsTrackingPrices);
         this.productsTrackingPrices = productsTrackingPrices;
       });
   }

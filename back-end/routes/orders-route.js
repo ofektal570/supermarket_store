@@ -41,4 +41,16 @@ router.delete("/:id", async function (req, res) {
   }
 });
 
+router.delete("/", async function (req, res) {
+  try {
+    order.destroy({
+      where: {},
+      truncate: true,
+    });
+    return res.json({ msg: "clear" });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({ error: "something went wrong" });
+  }
+});
 module.exports = router;

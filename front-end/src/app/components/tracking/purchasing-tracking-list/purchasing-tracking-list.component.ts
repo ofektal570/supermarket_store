@@ -18,7 +18,6 @@ export class PurchasingTrackingListComponent implements OnInit {
       .listenPurchasedCarts()
       .subscribe((purchasedCarts: PurchasedCart[]) => {
         this.purchasedCarts = purchasedCarts;
-        console.log('res from get (component)',this.purchasedCarts);
       });
   }
 }

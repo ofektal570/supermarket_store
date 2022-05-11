@@ -19,7 +19,7 @@ export class ProductListComponent implements OnInit {
     // } else {
     //   this.loadProducts();
     // }
-    this.products = this.productService.getProducts();
+    this.products = this.productService.loadProducts();
     this.productService.listenProducts().subscribe((products: Product[]) => {
       this.products = products;
     });
@@ -32,6 +32,7 @@ export class ProductListComponent implements OnInit {
   // }
   addToCart(product: Product): void {
     this.cartService.addProductToCart(product);
-    --product.amount;
+    console.log("product is ", product, "newAmount is ", product.amount - 1);
+    this.productService.updateProductAmount(product, product.amount - 1);
   }
 }
