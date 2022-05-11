@@ -115,12 +115,15 @@ router.delete("/:product_id", async (req, res) => {
     let tempIdArr = [...cartDetails.product_id];
     let productIdx = cartDetails.product_id.indexOf(parseInt(product_id));
     
+    console.log('BEFORE:');
+    console.log("CART_IDS:", cartDetails.product_id, "CART_QTYS", cartDetails.qty);
+    
     tempQtyArr.splice(productIdx, 1);
     tempIdArr.splice(productIdx, 1);
     
     cartDetails.qty = tempQtyArr.concat([]);
     cartDetails.product_id = tempIdArr.concat([]);
-    
+    console.log("AFTER:");
     console.log('CART_IDS:', cartDetails.product_id, 'CART_QTYS', cartDetails.qty);
     await cartDetails.save();
 

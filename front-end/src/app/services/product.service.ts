@@ -10,6 +10,7 @@ import {
 } from "../config/api";
 import { HttpClient } from "@angular/common/http";
 import { CartService } from "./cart.service";
+import { ProductTrackingPricesService } from "./product-tracking-prices.service";
 
 @Injectable({
   providedIn: "root",
@@ -19,7 +20,11 @@ export class ProductService {
   private loaded = false;
   products: Product[] = [];
 
-  constructor(private http: HttpClient, private cartService: CartService) {
+  constructor(
+    private http: HttpClient,
+    private cartService: CartService,
+    private productTrackingPrices: ProductTrackingPricesService
+  ) {
     // this.getProducts().subscribe((products) => {
     //   this.products = products;
     //   this.loaded = true;
@@ -117,6 +122,7 @@ export class ProductService {
       this.loadProducts();
     });
     this.cartService.removeProductFromCart(productToDelete);
+    this.productTrackingPrices.deleteProductTracking(productToDelete);
   }
 
   getNumOfProducts(): number {
@@ -141,6 +147,7 @@ export class ProductService {
   updateProductAmount(product: Product, newAmount: number): void {
     // product.amount = newAmount;
     // this.productsListener.next(this.products);
+    console.log('is is the address???: ',updateAmountUrl);
     console.log("THIS IS THE PRODUCT:", product, newAmount);
     this.http
       .put(updateAmountUrl, {

@@ -23,3 +23,6 @@ export function getUrlToDeleteProduct(product: Product): string {
 export function getUrlToReturnProduct(product: Product): string {
   return cartUrl + "/" + product.product_id;
 }
+export function getUrlToRemoveTrackingProduct(product: Product): string {
+  return pricesUrl + "/" + product.product_id;
+}

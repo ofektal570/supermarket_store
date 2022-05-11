@@ -54,6 +54,12 @@ export class ProductEditComponent implements OnInit {
       this.isPriceValid(productForm.value.price) &&
       productForm.value.price !== productToUpdatePrice.curr_price
     ) {
+      console.log(
+        "YOU IN CURR/VALUE/ID",
+        productToUpdatePrice.curr_price,
+        productForm.value.price,
+        productToUpdatePrice.product_id
+      );
       let currPrice = productToUpdatePrice.curr_price;
       let newPrice = productForm.value.price;
       this.productService.updateProductPrice(productToUpdatePrice, newPrice);

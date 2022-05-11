@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { Observable, Subject } from "rxjs";
 import { Product } from "../models/product";
 import { ProductTrackingPrices } from "../models/product-tracking-prices";
-import { pricesUrl } from "../config/api";
+import { getUrlToRemoveTrackingProduct, pricesUrl } from "../config/api";
 import { HttpClient } from "@angular/common/http";
 
 @Injectable({
@@ -27,11 +27,13 @@ export class ProductTrackingPricesService {
   }
   initProductsTrackingPrices(pricesSummary: any) {
     this.productsTrackingPrices = [];
+    console.log(pricesSummary.names.length, pricesSummary);
     for (let i = 0; i < pricesSummary.names.length; i++) {
       this.productsTrackingPrices.push(
         new ProductTrackingPrices(pricesSummary.names[i], pricesSummary.prices[i])
       );
     }
+    console.log('IN SERVICE!!!',this.productsTrackingPrices);
     this.productsTrackingPricesListener.next(this.productsTrackingPrices);
   }
   // const {product_id, prev_price, curr_price} = req.body;
@@ -61,5 +63,11 @@ export class ProductTrackingPricesService {
 
   listenProductTrackingPrices(): Observable<ProductTrackingPrices[]> {
     return this.productsTrackingPricesListener.asObservable();
+  }
+  
+  deleteProductTracking(product: Product): void{
+    this.http.delete(getUrlToRemoveTrackingProduct(product)).subscribe(() => {
+      console.log('deleted');
+    });
   }
 }

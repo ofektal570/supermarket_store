@@ -27,7 +27,7 @@ export class CartItemComponent implements OnInit {
     } else if (parseInt(qtyUser.target.value) > parseInt(qtyUser.target.max)) {
       qtyUser.target.value = qtyUser.target.max;
     }
-    console.log('CURRRR', qtyUser.target.value);
+    console.log("CURRRR", qtyUser.target.value);
     let firstAmountProduct = this.cartItem.product.amount + this.cartItem.qty;
     let newValue = parseInt(qtyUser.target.value);
 
@@ -41,24 +41,43 @@ export class CartItemComponent implements OnInit {
     this.cartService.calcCartTotal();
   }
 
+  // returnProduct(): void {
+  //   if (confirm("Are you sure to return " + this.cartItem.product.name + "?")) {
+  //     if (this.cartItem.qty) {
+  //       this.productService.updateProductAmount(
+  //         this.cartItem.product,
+  //         this.cartItem.product.amount + 1
+  //       );
+  //     }
+
+  //     if (0 === this.cartItem.qty) {
+  //       this.cartService.removeProductFromCart(this.cartItem.product);
+  //     } else {
+  //       this.cartService.updateQtyInDB(
+  //         this.cartItem.product.product_id,
+  //         this.cartItem.qty - 1
+  //       );
+  //       this.cartService.calcCartTotal();
+  //     }
+  //   }
+  // }
   returnProduct(): void {
     if (confirm("Are you sure to return " + this.cartItem.product.name + "?")) {
-      if (this.cartItem.qty) {
+      // if (this.cartItem.qty) {
         this.productService.updateProductAmount(
           this.cartItem.product,
-          this.cartItem.product.amount + 1
+          this.cartItem.product.amount + this.cartItem.qty
         );
-      }
+      // }
 
-      if (0 === this.cartItem.qty) {
+      // if (0 === this.cartItem.qty) {
         this.cartService.removeProductFromCart(this.cartItem.product);
-      } else {
-        this.cartService.updateQtyInDB(
-          this.cartItem.product.product_id,
-          this.cartItem.qty - 1
-        );
+      // } else {
+        // this.cartService.updateQtyInDB(
+        //   this.cartItem.product.product_id,
+        //   0
+        // );
         this.cartService.calcCartTotal();
       }
     }
-  }
 }

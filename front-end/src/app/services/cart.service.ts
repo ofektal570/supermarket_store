@@ -90,7 +90,7 @@ export class CartService {
     for (let cartItem of this.cartItems) {
       if (cartItem.product.product_id === product.product_id) {
         isExists = true;
-        currQty = cartItem.qty++;
+        currQty = cartItem.qty;
         console.log("YEAH IM HERE EXIST1!!");
 
         break;
@@ -98,7 +98,7 @@ export class CartService {
     }
 
     if (!isExists) {
-      console.log('LETS SEE!!!',product);
+      console.log("LETS SEE!!!", product);
       this.addProductToDB(product.product_id, 1);
     } else {
       console.log("YEAH IM HERE EXIST2!!");
