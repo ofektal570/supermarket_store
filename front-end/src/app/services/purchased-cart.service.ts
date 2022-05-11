@@ -78,7 +78,8 @@ export class PurchasedCartService {
       purchasedCarts.push(
         new PurchasedCart(
           purchasedProducts,
-          parseFloat(order.total_price),
+          this.calcTotal(purchasedProducts, order.delivery_option),
+          // parseFloat(order.total_price),
           order.delivery_option
         )
       );
@@ -90,5 +91,13 @@ export class PurchasedCartService {
 
   listenPurchasedCarts(): Observable<PurchasedCart[]> {
     return this.purchasedCartsListener.asObservable();
+  }
+  
+  calcTotal(purchasedProducts: PurchasedProduct[], delivery_option: string): number {
+    let totalPrice = delivery_option === '2' ? 5 : 0;
+    for (let product of purchasedProducts) {
+      totalPrice += (product.price * product.qty);
+    }
+    return totalPrice;
   }
 }
