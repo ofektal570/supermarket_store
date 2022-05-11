@@ -1,3 +1,3 @@
 export class PurchasedProduct {
-  constructor(public productName: string, public qty: number, public price: number) {}
+  constructor(public product_name: string, public qty: number, public price: number) {}
 }

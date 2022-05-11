@@ -13,11 +13,12 @@ export class PurchasingTrackingListComponent implements OnInit {
   constructor(private purchasedCartsService: PurchasedCartService) {}
 
   ngOnInit(): void {
-    this.purchasedCarts = this.purchasedCartsService.getPurchasedCarts();
+    this.purchasedCartsService.loadPurchasedCarts();
     this.purchasedCartsService
       .listenPurchasedCarts()
       .subscribe((purchasedCarts: PurchasedCart[]) => {
         this.purchasedCarts = purchasedCarts;
+        console.log('res from get (component)',this.purchasedCarts);
       });
   }
 }

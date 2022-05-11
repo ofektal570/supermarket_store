@@ -5,10 +5,12 @@ const productsRoute = require("./routes/products-route");
 const cartRoute = require("./routes/cart-route");
 const pricesRoute = require("./routes/prices-route");
 const ordersRoute = require("./routes/orders-route");
+const morgan = require("morgan");
 
 const app = express();
 let port = 3000;
 
+app.use(morgan("dev"));
 app.use(express.json());
 
 app.use((req, res, next) => {
