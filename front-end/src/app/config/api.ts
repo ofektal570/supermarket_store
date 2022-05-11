@@ -10,6 +10,8 @@ export const updatePriceUrl = productsUrl + "/update_price";
 export const updateAmountUrl = productsUrl + "/update_amount";
 export const getUniqueIdUrl = productsUrl + "/unique_id";
 export const cartUrl = baseUrl + "/cart";
+export const updateQtyUrl = cartUrl + "/update_qty";
+export const updateDeliveryUrl = cartUrl + "/update_delivery";
 export const ordersUrl = baseUrl + "/orders";
 export const pricesUrl = baseUrl + "/prices";
 

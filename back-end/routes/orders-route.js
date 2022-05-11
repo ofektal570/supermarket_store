@@ -12,7 +12,6 @@ router.get("/", async (req, res) => {
 router.post("/", async (req, res) => {
   try {
     const { product_name, qty, total_price, delivery_option } = req.body;
-    console.log(req.body);
     const orderSummary = await order.create({
       product_name,
       qty,

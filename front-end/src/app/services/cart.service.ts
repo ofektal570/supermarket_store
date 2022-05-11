@@ -2,7 +2,8 @@ import { HostListener, Injectable, OnDestroy, OnInit } from "@angular/core";
 import { Observable, Subject } from "rxjs";
 import { CartItem } from "../models/cart-item";
 import { Product } from "../models/product";
-import { cartUrl } from "../config/api";
+import { cartUrl, updateQtyUrl, updateDeliveryUrl, getUrlToDeleteProduct } from "../config/api";
+import { HttpClient } from "@angular/common/http";
 
 @Injectable({
   providedIn: "root",
@@ -12,7 +13,7 @@ export class CartService {
   private cartItemsListener = new Subject<CartItem[]>();
   private deliveryType = 1;
 
-  constructor() {
+  constructor(private http: HttpClient) {
     // this.http.get(cartUrl).subscribe((cartItems) => {
     //   this.initCartItems(cartItems);
     // });
@@ -39,44 +40,102 @@ export class CartService {
   //     });
   // }
 
-  initCartItems(cartItems: any): void {
-    // console.log('SSSSSSSSSSSSSSSSSSSSS',cartItems);
-    const productsArr = cartItems.productsArr;
-    const qtyArr = cartItems.qty;
+  // initCartItems(cartItems: any): void {
+  //   // console.log('SSSSSSSSSSSSSSSSSSSSS',cartItems);
+  //   const productsArr = cartItems.productsArr;
+  //   const qtyArr = cartItems.qty;
 
-    for (let i = 0; i < productsArr.length; i++) {
-      this.cartItems.push(new CartItem(productsArr[i], qtyArr[i]));
-    }
+  //   for (let i = 0; i < productsArr.length; i++) {
+  //     this.cartItems.push(new CartItem(productsArr[i], qtyArr[i]));
+  //   }
 
-    this.deliveryType = cartItems.delivery_option === "delivery" ? 2 : 1;
-    this.cartItemsListener.next(this.cartItems);
-  }
+  //   this.deliveryType = cartItems.delivery_option === "delivery" ? 2 : 1;
+  //   this.cartItemsListener.next(this.cartItems);
+  // }
 
   getCartItems(): CartItem[] {
+    this.loadCartItems();
     return this.cartItems;
+  }
+
+  loadCartItems(): void {
+    this.http.get(cartUrl).subscribe((cartItems: any) => {
+      console.log("this is the ans from the get req:", cartItems);
+      this.initCartItems(cartItems.productsArr, cartItems.qty, cartItems.delivery_option);
+      this.cartItemsListener.next(this.cartItems);
+    });
+  }
+  initCartItems(productsArr: any[], qtyArr: number[], delivery_option: string): void {
+    let cart: CartItem[] = [];
+    // console.log(productsArr);
+    for (let i = 0; i < productsArr.length; i++) {
+      cart.push(new CartItem(productsArr[i], qtyArr[i]));
+    }
+    this.deliveryType = delivery_option === "delivery" ? 2 : 1;
+
+    this.cartItems = [...cart];
+    console.log(this.cartItems);
   }
 
   addProductToCart(product: Product): void {
     let isExists = false;
+    let currQty = 0;
+    
+    console.log('YEAH IM HERE ADDING!!');
     for (let cartItem of this.cartItems) {
-      if (cartItem.product === product) {
+      if (cartItem.product.product_id === product.product_id) {
         isExists = true;
-        cartItem.qty++;
+        currQty = cartItem.qty++;
+    console.log("YEAH IM HERE EXIST1!!");
+        
         break;
+        
       }
     }
+
     if (!isExists) {
-      this.cartItems.push(new CartItem(product));
+      this.addProductToDB(product.product_id, 1);
+    } else {
+    console.log("YEAH IM HERE EXIST2!!");
+      
+      this.updateQtyInDB(product.product_id, currQty + 1);
     }
 
-    this.cartItemsListener.next(this.cartItems);
+    // this.cartItemsListener.next(this.cartItems);
+  }
+
+  updateQtyInDB(product_id: number, qty: number): void {
+    console.log("What is the qty?", qty);
+    
+    this.http
+      .put(updateQtyUrl, {
+        product_id,
+        qty,
+      })
+      .subscribe(() => {
+        this.loadCartItems();
+      });
+  }
+
+  addProductToDB(product_id: number, qty: number): void {
+    this.http
+      .post(cartUrl, {
+        product_id,
+        qty,
+      })
+      .subscribe(() => {
+        this.loadCartItems();
+      });
   }
 
   removeProductFromCart(product: Product): void {
-    this.cartItems = this.cartItems.filter(
-      (cartItem: CartItem) => cartItem.product !== product
-    );
-    this.cartItemsListener.next(this.cartItems);
+    // this.cartItems = this.cartItems.filter(
+    //   (cartItem: CartItem) => cartItem.product !== product
+    // );
+    // this.cartItemsListener.next(this.cartItems);
+    this.http.delete(getUrlToDeleteProduct(product)).subscribe(() => {
+      this.loadCartItems();
+    });
   }
 
   listenCartItems(): Observable<CartItem[]> {
@@ -84,16 +143,22 @@ export class CartService {
   }
 
   emptyCart(): void {
-    this.cartItems = [];
-    this.cartItemsListener.next(this.cartItems);
+    // this.cartItems = [];
+    // this.cartItemsListener.next(this.cartItems);
+    this.http.delete(cartUrl).subscribe(() => {
+      this.loadCartItems();
+    });
   }
 
   calcCartTotal(): void {
     this.cartItemsListener.next(this.cartItems);
   }
 
-  setDeliveryOption(delivery_option: number): void {
-    this.deliveryType = delivery_option;
+  setDeliveryOption(deliveryIdentify: number): void {
+    let delivery_option = deliveryIdentify == 2 ? "delivery" : "take-away";
+    this.http.put(updateDeliveryUrl, { delivery_option }).subscribe(() => {
+      this.loadCartItems();
+    });
   }
 
   getDeliveryOption(): number {
