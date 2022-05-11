@@ -16,18 +16,15 @@ export class CartItemComponent implements OnInit {
   constructor(private productService: ProductService, private cartService: CartService) {}
 
   ngOnInit(): void {
-    console.log("loaded");
     // this.firstAmountItem = this.cartItem.product.amount + 1;
   }
 
   onChangeQty(qtyUser: any): void {
-    console.log(typeof qtyUser.target.max);
     if (parseInt(qtyUser.target.value) < parseInt(qtyUser.target.min)) {
       qtyUser.target.value = qtyUser.target.min;
     } else if (parseInt(qtyUser.target.value) > parseInt(qtyUser.target.max)) {
       qtyUser.target.value = qtyUser.target.max;
     }
-    console.log("CURRRR", qtyUser.target.value);
     let firstAmountProduct = this.cartItem.product.amount + this.cartItem.qty;
     let newValue = parseInt(qtyUser.target.value);
 

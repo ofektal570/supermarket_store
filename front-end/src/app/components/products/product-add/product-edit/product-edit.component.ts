@@ -39,7 +39,6 @@ export class ProductEditComponent implements OnInit {
 
   onDeleteProduct(productToDelete: Product): void {
     if (confirm("Are you sure to delete " + productToDelete.name + "?")) {
-      console.log("im here");
       this.productService.deleteProduct(productToDelete);
     }
   }

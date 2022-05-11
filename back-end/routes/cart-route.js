@@ -37,10 +37,14 @@ router.post("/", async (req, res) => {
     // const cartItems = await cart.create({ product_id:null, qty:null, delivery_option:null });
     let cartDetails = await cart.findOne({ where: { id: 1 } });
 
-    cartDetails.qty = cartDetails.qty.concat([qty]);
-    cartDetails.product_id = cartDetails.product_id.concat([product_id]);
+    if (!cartDetails.product_id.includes(product_id)) {
+      cartDetails.qty = cartDetails.qty.concat([qty]);
+      cartDetails.product_id = cartDetails.product_id.concat([product_id]);
 
-    await cartDetails.save();
+      await cartDetails.save();
+    }else{
+      console.log("I SAVED YOU!!!!");
+    }
     // console.log(cartDetails.dataValues.product_id);
     return res.json({ msg: "Added" });
   } catch (err) {
@@ -74,7 +78,7 @@ router.put("/update_qty", async (req, res) => {
     let cartDetails = await cart.findOne({ where: { id: 1 } });
     let productIdx = cartDetails.product_id.indexOf(parseInt(product_id));
     let tempQty = [...cartDetails.qty];
-    
+
     tempQty[productIdx] = qty;
     cartDetails.qty = tempQty.concat([]);
     // cartDetails.qty = cartDetails.qty.concat([qty]);
@@ -109,22 +113,15 @@ router.delete("/:product_id", async (req, res) => {
   const { product_id } = req.params;
   try {
     let cartDetails = await cart.findOne({ where: { id: 1 } });
-    
-    console.log("LEN:", product_id.length, "ID:", product_id);
     let tempQtyArr = [...cartDetails.qty];
     let tempIdArr = [...cartDetails.product_id];
     let productIdx = cartDetails.product_id.indexOf(parseInt(product_id));
-    
-    console.log('BEFORE:');
-    console.log("CART_IDS:", cartDetails.product_id, "CART_QTYS", cartDetails.qty);
-    
+
     tempQtyArr.splice(productIdx, 1);
     tempIdArr.splice(productIdx, 1);
-    
+
     cartDetails.qty = tempQtyArr.concat([]);
     cartDetails.product_id = tempIdArr.concat([]);
-    console.log("AFTER:");
-    console.log('CART_IDS:', cartDetails.product_id, 'CART_QTYS', cartDetails.qty);
     await cartDetails.save();
 
     return res.json({ msg: "product removed" });

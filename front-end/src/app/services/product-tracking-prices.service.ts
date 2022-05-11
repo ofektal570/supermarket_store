@@ -27,13 +27,11 @@ export class ProductTrackingPricesService {
   }
   initProductsTrackingPrices(pricesSummary: any) {
     this.productsTrackingPrices = [];
-    console.log(pricesSummary.names.length, pricesSummary);
     for (let i = 0; i < pricesSummary.names.length; i++) {
       this.productsTrackingPrices.push(
         new ProductTrackingPrices(pricesSummary.names[i], pricesSummary.prices[i])
       );
     }
-    console.log('IN SERVICE!!!',this.productsTrackingPrices);
     this.productsTrackingPricesListener.next(this.productsTrackingPrices);
   }
   // const {product_id, prev_price, curr_price} = req.body;

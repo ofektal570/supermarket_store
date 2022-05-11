@@ -31,7 +31,6 @@ export class ProductListComponent implements OnInit {
   //   });
   // }
   addToCart(product: Product): void {
-    console.log("im here dude!!!!!!!!", product);
     
     this.productService.updateProductAmount(product, product.amount - 1);
     this.cartService.addProductToCart(product);

@@ -19,7 +19,6 @@ router.get("/unique_id", async (req, res) => {
       .findAll({
         limit: 1,
         where: {
-          //your where conditions, or without them if you need ANY entry
         },
         order: [["createdAt", "DESC"]],
       })

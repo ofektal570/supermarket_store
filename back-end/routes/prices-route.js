@@ -7,7 +7,6 @@ router.get("/", async (req, res) => {
   try {
     const pricesArr = await price.findAll();
     let productsName = [];
-    // console.log(pricesArr);
     for (let item of pricesArr) {
       const product_id = item.product_id;
       const product = await products.findOne({ where: { product_id } });

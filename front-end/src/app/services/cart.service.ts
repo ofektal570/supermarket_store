@@ -65,7 +65,6 @@ export class CartService {
 
   loadCartItems(): void {
     this.http.get(cartUrl).subscribe((cartItems: any) => {
-      console.log("this is the ans from the get req:", cartItems);
       this.initCartItems(cartItems.productsArr, cartItems.qty, cartItems.delivery_option);
       this.cartItemsListener.next(this.cartItems);
     });
@@ -79,30 +78,24 @@ export class CartService {
     this.deliveryType = delivery_option === "delivery" ? 2 : 1;
 
     this.cartItems = [...cart];
-    console.log(this.cartItems);
   }
 
   addProductToCart(product: Product): void {
     let isExists = false;
     let currQty = 0;
 
-    console.log("YEAH IM HERE ADDING!!");
     for (let cartItem of this.cartItems) {
       if (cartItem.product.product_id === product.product_id) {
         isExists = true;
         currQty = cartItem.qty;
-        console.log("YEAH IM HERE EXIST1!!");
 
         break;
       }
     }
 
     if (!isExists) {
-      console.log("LETS SEE!!!", product);
       this.addProductToDB(product.product_id, 1);
     } else {
-      console.log("YEAH IM HERE EXIST2!!");
-
       this.updateQtyInDB(product.product_id, currQty + 1);
     }
 
@@ -110,8 +103,6 @@ export class CartService {
   }
 
   updateQtyInDB(product_id: number, qty: number): void {
-    console.log("What is the qty?", qty);
-
     this.http
       .put(updateQtyUrl, {
         product_id,

@@ -147,8 +147,6 @@ export class ProductService {
   updateProductAmount(product: Product, newAmount: number): void {
     // product.amount = newAmount;
     // this.productsListener.next(this.products);
-    console.log('is is the address???: ',updateAmountUrl);
-    console.log("THIS IS THE PRODUCT:", product, newAmount);
     this.http
       .put(updateAmountUrl, {
         product_id: product.product_id,
