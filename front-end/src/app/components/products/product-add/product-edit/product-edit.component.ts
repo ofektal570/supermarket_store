@@ -111,7 +111,7 @@ export class ProductEditComponent implements OnInit {
         this.productService.addProduct(dish);
       }, timeout);
 
-      timeout += 250;
+      timeout += 500;
     }
 
     setTimeout(() => {

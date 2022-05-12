@@ -7,8 +7,13 @@ const router = Router();
 
 router.get("/", async (req, res) => {
   try {
-    const cartItems = await cart.findAll();
-    
+    let cartItems = await cart.findAll();
+
+    if (cartItems.length == 0) {
+      await cart.create({ product_id: [], qty: [], delivery_option: "take-away" });
+      cartItems = await cart.findAll();
+    }
+
     if (cartItems[0].dataValues.product_id !== null) {
       const proudctsId = cartItems[0].dataValues.product_id;
       let productsArr = [];
@@ -24,7 +29,7 @@ router.get("/", async (req, res) => {
         delivery_option: cartItems[0].dataValues.delivery_option,
       });
     }
-    
+
     return res.json(cartItems);
   } catch (err) {
     console.log(err);
@@ -42,10 +47,10 @@ router.post("/", async (req, res) => {
       cartDetails.product_id = cartDetails.product_id.concat([product_id]);
 
       await cartDetails.save();
-    }else{
+    } else {
       console.log("I SAVED YOU!!!!");
     }
-    
+
     return res.json(cartDetails);
   } catch (err) {
     console.log(err);

@@ -16,4 +16,16 @@ router.post("/", async (req, res) => {
   }
 });
 
+router.post("/add", async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    const admins = await Admins.create({ email, password });
+
+    return res.json(admins);
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({ error: "something went wrong!!" });
+  }
+});
+
 module.exports = router;

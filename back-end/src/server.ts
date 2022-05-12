@@ -10,7 +10,6 @@ const cartRoute = require("./routes/cart-route");
 const pricesRoute = require("./routes/prices-route");
 const ordersRoute = require("./routes/orders-route");
 const socketRoute = require("./routes/socket-io-route");
-// const socketIoObject = require("./socket-io");
 const socketio = require("socket.io");
 
 const app = express();

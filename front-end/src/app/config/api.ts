@@ -1,9 +1,11 @@
 import { environment } from "src/environments/environment";
 import { Product } from "../models/product";
 
-export const baseUrl = environment.production
-  ? "http://api.supermarket-store.com"
-  : "http://localhost:3000";
+export const baseUrl = "http://localhost:3000";
+  // environment.production
+//   ? "http://api.supermarket-store.com"
+//   : "http://localhost:3000";
+export const SocketUrl = baseUrl;
 export const adminsUrl = baseUrl + "/admins";
 export const productsUrl = baseUrl + "/products";
 export const updatePriceUrl = productsUrl + "/update_price";

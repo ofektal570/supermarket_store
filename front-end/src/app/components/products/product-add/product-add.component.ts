@@ -18,7 +18,7 @@ export class ProductAddComponent implements OnInit {
       return;
     } else if (this.productService.getNumOfProducts() >= 5) {
       alert("You can't add more than 5 products");
-      productForm.resetForm();
+      // productForm.resetForm();
       return;
     }
 
