@@ -17,7 +17,6 @@ import { ProductTrackingPricesService } from "./product-tracking-prices.service"
 })
 export class ProductService {
   private productsListener = new Subject<Product[]>();
-  private loaded = false;
   products: Product[] = [];
 
   constructor(
