@@ -40,7 +40,7 @@ export class PurchasedCartService {
         delivery_option: delivery,
       })
       .subscribe(() => {
-        console.log("posted!");
+        // console.log("posted!");
       });
   }
 

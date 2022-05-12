@@ -1,13 +1,16 @@
-const express = require("express");
+import express, { Request, Response, NextFunction } from "express";
+import  {SocketIo}  from "./socket-io";
+
 const morgan = require("morgan");
-const { sequelize } = require("./models");
+
+const { sequelize } = require("../models/");
 const adminsRoute = require("./routes/admins-route");
 const productsRoute = require("./routes/products-route");
 const cartRoute = require("./routes/cart-route");
 const pricesRoute = require("./routes/prices-route");
 const ordersRoute = require("./routes/orders-route");
 const socketRoute = require("./routes/socket-io-route");
-const SocketIoObject = require("./socket-io");
+// const socketIoObject = require("./socket-io");
 const socketio = require("socket.io");
 
 const app = express();
@@ -16,10 +19,8 @@ let port = 3000;
 app.use(morgan("dev"));
 app.use(express.json());
 
-
-
 // Prevent Cors
-app.use((req, res, next) => {
+app.use((req: Request, res: Response, next: NextFunction) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(
     "Access-Control-Allow-Headers",
@@ -58,9 +59,9 @@ const io = socketio(server, {
   },
 });
 
-io.on("connection", function (socket) {
+io.on("connection", function (socket: { emit: (arg0: string, arg1: string) => void; }) {
   console.log("Made socket connection");
-  SocketIoObject.ListenUpdatePrice().on("start", () => {
+  SocketIo.ListenUpdatePrice().on("start", () => {
     console.log("PRICE UPDATED");
     socket.emit("update-price-stream", "Please Load Your Products, Price Changed");
   });

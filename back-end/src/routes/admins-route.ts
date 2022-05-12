@@ -1,5 +1,6 @@
-const { Router } = require("express");
-const { Admins } = require("../models");
+// const { Router } = require("express");
+import { Router } from "express";
+const { Admins } = require("../../models/");
 
 const router = Router();
 

@@ -1,6 +1,9 @@
-const { Router } = require("express");
-const { products, price } = require("../models");
-const SocketIoObject = require("../socket-io");
+// const { Router } = require("express");
+import { Router } from "express";
+import { SocketIo } from "../socket-io";
+
+const { products, price } = require("../../models/");
+
 
 const router = Router();
 
@@ -15,7 +18,7 @@ router.put("/update_price", async (req, res) => {
 
     await productToUpdate.save();
 
-    SocketIoObject.emitUpdatePrice();
+    SocketIo.emitUpdatePrice();
 
     // update price tracking
     const prev_price = productToUpdate.prev_price;

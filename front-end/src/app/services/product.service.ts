@@ -58,7 +58,6 @@ export class ProductService {
   }
 
   addProduct(product: Product): void {
-    console.log("THATS NOW ME!!", product.product_id);
     this.http.get(getUniqueIdUrl).subscribe((unique_id) => {
       this.http
         .post(productsUrl, {

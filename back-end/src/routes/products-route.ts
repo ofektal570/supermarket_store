@@ -1,5 +1,7 @@
-const { Router } = require("express");
-const { products } = require("../models");
+// const { Router } = require("express");
+import { Router } from "express";
+
+const { products } = require("../../models/");
 
 const router = Router();
 
@@ -22,7 +24,7 @@ router.get("/unique_id", async (req, res) => {
         where: {},
         order: [["createdAt", "DESC"]],
       })
-      .then(function (entries) {
+      .then(function (entries: { dataValues: { id: number; }; }[]) {
         let id = 0;
 
         if (entries[0] != null) {

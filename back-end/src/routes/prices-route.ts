@@ -1,5 +1,7 @@
-const { Router } = require("express");
-const { price, products } = require("../models");
+// const { Router } = require("express");
+import { Router } from "express";
+
+const { price, products } = require("../../models/");
 
 const router = Router();
 
