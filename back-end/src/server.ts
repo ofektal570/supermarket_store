@@ -13,7 +13,7 @@ const socketRoute = require("./routes/socket-io-route");
 const socketio = require("socket.io");
 
 const app = express();
-let port = 3000;
+let port = process.env.PORT || 3000;
 
 app.use(morgan("dev"));
 app.use(express.json());
