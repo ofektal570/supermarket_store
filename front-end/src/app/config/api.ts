@@ -1,7 +1,7 @@
 import { environment } from "src/environments/environment";
 import { Product } from "../models/product";
 
-export const baseUrl = "http://localhost:3000";
+export const baseUrl = "https://my-supermarket.herokuapp.com";
   // environment.production
 //   ? "http://api.supermarket-store.com"
 //   : "http://localhost:3000";
