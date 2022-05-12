@@ -1,5 +1,5 @@
 import express, { Request, Response, NextFunction } from "express";
-import  {SocketIo}  from "./socket-io";
+import { SocketIo } from "./socket-io";
 
 const morgan = require("morgan");
 
@@ -37,6 +37,9 @@ app.use("/prices", pricesRoute);
 app.use("/orders", ordersRoute);
 app.use("/socket-io", socketRoute);
 
+app.get("/", async (req, res) => {
+  res.json("connected!");
+});
 // Uploading a server + connect to DB
 const server = app.listen({ port }, async () => {
   console.log("Server Listening to port ", port);
@@ -58,14 +61,10 @@ const io = socketio(server, {
   },
 });
 
-io.on("connection", function (socket: { emit: (arg0: string, arg1: string) => void; }) {
+io.on("connection", function (socket: { emit: (arg0: string, arg1: string) => void }) {
   console.log("Made socket connection");
   SocketIo.ListenUpdatePrice().on("start", () => {
     console.log("PRICE UPDATED");
     socket.emit("update-price-stream", "Please Load Your Products, Price Changed");
   });
 });
-
-
-
-
