@@ -20,7 +20,7 @@ export class AuthenticationAdminComponent implements OnInit {
       email: form.value.email,
       password: form.value.password,
     };
-    
+
     this.http
       .post<{ email: string; password: string }>(adminsUrl, user)
       .subscribe((obj: any) => {

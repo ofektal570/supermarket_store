@@ -11,7 +11,12 @@
     <div class="col-md-4" *ngFor="let product of products">
       <div class="card mb-4 shadow-sm">
         <app-product-item [productItem]="product"></app-product-item>
-        <button [disabled]="product.amount === 0" mat-button color="accent" (click)="addToCart(product)">
+        <button
+          [disabled]="product.amount === 0"
+          mat-button
+          color="accent"
+          (click)="addToCart(product)"
+        >
           <mat-icon>add_shopping_cart</mat-icon>
         </button>
       </div>

@@ -5,7 +5,6 @@ import { Component, Input, OnInit } from "@angular/core";
   templateUrl: "./purchasing-tracking-item.component.html",
   styleUrls: ["./purchasing-tracking-item.component.css"],
 })
-
 export class PurchasingTrackingItemComponent implements OnInit {
   @Input() phrchasedCart: any;
   public expandMore = false;

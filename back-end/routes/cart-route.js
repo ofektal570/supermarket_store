@@ -6,9 +6,8 @@ const router = Router();
 router.get("/", async (req, res) => {
   try {
     const cartItems = await cart.findAll();
-    if (cartItems[0].dataValues.product_id === null) {
-      console.log("cart empty");
-    } else {
+    
+    if (cartItems[0].dataValues.product_id !== null) {
       const proudctsId = cartItems[0].dataValues.product_id;
       let productsArr = [];
       for (let i = 0; i < proudctsId.length; i++) {
@@ -23,6 +22,7 @@ router.get("/", async (req, res) => {
         delivery_option: cartItems[0].dataValues.delivery_option,
       });
     }
+    
     return res.json(cartItems);
   } catch (err) {
     console.log(err);
@@ -33,8 +33,6 @@ router.get("/", async (req, res) => {
 router.post("/", async (req, res) => {
   const { product_id, qty } = req.body;
   try {
-    // const cartItems = await cart.create({ product_id, qty, delivery_option });
-    // const cartItems = await cart.create({ product_id:null, qty:null, delivery_option:null });
     let cartDetails = await cart.findOne({ where: { id: 1 } });
 
     if (!cartDetails.product_id.includes(product_id)) {
@@ -45,14 +43,13 @@ router.post("/", async (req, res) => {
     }else{
       console.log("I SAVED YOU!!!!");
     }
-    // console.log(cartDetails.dataValues.product_id);
-    return res.json({ msg: "Added" });
+    
+    return res.json(cartDetails);
   } catch (err) {
     console.log(err);
     return res.status(500).json({ error: "something went wrong" });
   }
 });
-// const { product_id, qty, delivery_option } = req.body;
 
 router.put("/", async (req, res) => {
   const { product_id, qty } = req.body;
@@ -61,7 +58,6 @@ router.put("/", async (req, res) => {
 
     cartDetails.product_id = product_id;
     cartDetails.qty = qty;
-    // cartDetails.delivery_option = delivery_option;
 
     await cartDetails.save();
 
@@ -81,8 +77,6 @@ router.put("/update_qty", async (req, res) => {
 
     tempQty[productIdx] = qty;
     cartDetails.qty = tempQty.concat([]);
-    // cartDetails.qty = cartDetails.qty.concat([qty]);
-    // cartDetails.delivery_option = delivery_option;
 
     await cartDetails.save();
 

@@ -15,7 +15,6 @@ export class ProductTrackingPrices {
     }
   ) {
     this.initTable(pricesSummary.prices, pricesSummary.dates);
-    // this.addNewTracking(product.prev_price, product.curr_price);
   }
 
   initTable(prices: number[], dates: string[]): void {
@@ -45,5 +44,3 @@ export class ProductTrackingPrices {
     });
   }
 }
-
-// .toDateString()

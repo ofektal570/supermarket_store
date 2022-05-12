@@ -1,11 +1,11 @@
 const express = require("express");
+const morgan = require("morgan");
 const { sequelize } = require("./models");
 const adminsRoute = require("./routes/admins-route");
 const productsRoute = require("./routes/products-route");
 const cartRoute = require("./routes/cart-route");
 const pricesRoute = require("./routes/prices-route");
 const ordersRoute = require("./routes/orders-route");
-const morgan = require("morgan");
 
 const app = express();
 let port = 3000;
@@ -13,6 +13,7 @@ let port = 3000;
 app.use(morgan("dev"));
 app.use(express.json());
 
+// Prevent Cors
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(
@@ -23,12 +24,14 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use('/admins', adminsRoute);
+// Routes
+app.use("/admins", adminsRoute);
 app.use("/products", productsRoute);
 app.use("/cart", cartRoute);
 app.use("/prices", pricesRoute);
 app.use("/orders", ordersRoute);
 
+// Uploading a server + connect to DB
 app.listen({ port }, async () => {
   console.log("Server Listening to port ", port);
   try {
@@ -38,35 +41,3 @@ app.listen({ port }, async () => {
     console.log("Unable to coonect to the DB");
   }
 });
-
-// app.get("/admins", async (req, res) => {
-//   try {
-//     const admins = await Admins.findAll();
-//     return res.json(admins);
-//   } catch (err) {
-//     console.log(err);
-//     return res.status(500).json({ error: "something went wrong" });
-//   }
-// });
-
-// app.post("/admins", async (req, res) => {
-//   try {
-//     const {email, password} = req.body;
-
-//     const admins = await Admins.create({ email, password });
-
-//     return res.json(admins);
-//   } catch (err) {
-//     console.log(err);
-//     return res.status(500).json({ error: "something went wrong" });
-//   }
-// });
-
-// app.use((error, req, res, next) => {
-//   res.status(error.status || 500);
-//   res.json({
-//     error: {
-//       message: error.message,
-//     },
-//   });
-// });

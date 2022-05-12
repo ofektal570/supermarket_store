@@ -15,9 +15,7 @@ export class CartItemComponent implements OnInit {
 
   constructor(private productService: ProductService, private cartService: CartService) {}
 
-  ngOnInit(): void {
-    // this.firstAmountItem = this.cartItem.product.amount + 1;
-  }
+  ngOnInit(): void {}
 
   onChangeQty(qtyUser: any): void {
     if (parseInt(qtyUser.target.value) < parseInt(qtyUser.target.min)) {
@@ -33,48 +31,19 @@ export class CartItemComponent implements OnInit {
       firstAmountProduct - newValue
     );
 
-    // this.cartItem.qty = newValue;
     this.cartService.updateQtyInDB(this.cartItem.product.product_id, newValue);
     this.cartService.calcCartTotal();
   }
 
-  // returnProduct(): void {
-  //   if (confirm("Are you sure to return " + this.cartItem.product.name + "?")) {
-  //     if (this.cartItem.qty) {
-  //       this.productService.updateProductAmount(
-  //         this.cartItem.product,
-  //         this.cartItem.product.amount + 1
-  //       );
-  //     }
-
-  //     if (0 === this.cartItem.qty) {
-  //       this.cartService.removeProductFromCart(this.cartItem.product);
-  //     } else {
-  //       this.cartService.updateQtyInDB(
-  //         this.cartItem.product.product_id,
-  //         this.cartItem.qty - 1
-  //       );
-  //       this.cartService.calcCartTotal();
-  //     }
-  //   }
-  // }
   returnProduct(): void {
     if (confirm("Are you sure to return " + this.cartItem.product.name + "?")) {
-      // if (this.cartItem.qty) {
-        this.productService.updateProductAmount(
-          this.cartItem.product,
-          this.cartItem.product.amount + this.cartItem.qty
-        );
-      // }
+      this.productService.updateProductAmount(
+        this.cartItem.product,
+        this.cartItem.product.amount + this.cartItem.qty
+      );
 
-      // if (0 === this.cartItem.qty) {
-        this.cartService.removeProductFromCart(this.cartItem.product);
-      // } else {
-        // this.cartService.updateQtyInDB(
-        //   this.cartItem.product.product_id,
-        //   0
-        // );
-        this.cartService.calcCartTotal();
-      }
+      this.cartService.removeProductFromCart(this.cartItem.product);
+      this.cartService.calcCartTotal();
     }
+  }
 }

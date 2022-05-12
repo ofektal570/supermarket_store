@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { CartItem } from "src/app/models/cart-item";
 import { PurchasedProduct } from "src/app/models/purchased-product";
 import { CartService } from "src/app/services/cart.service";
@@ -21,19 +21,7 @@ export class CartListComponent implements OnInit {
     private purchasedCartService: PurchasedCartService,
     private productService: ProductService
   ) {}
-  // // myValue = "is it work??";
 
-  // // // call this event handler before browser refresh
-  // @HostListener("window:beforeunload", ["$event"]) unloadHandler(event: Event) {
-  //   // console.log("Processing beforeunload...", this.myValue);
-  //   this.saveCart();
-  // }
-
-  // // // execute this function before browser refresh
-  // saveCart():void {
-  //   this.cartService.saveCart();
-  // }
-  
   ngOnInit(): void {
     this.calcCartTotal();
 

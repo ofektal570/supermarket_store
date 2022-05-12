@@ -15,7 +15,6 @@ export const updateDeliveryUrl = cartUrl + "/update_delivery";
 export const ordersUrl = baseUrl + "/orders";
 export const pricesUrl = baseUrl + "/prices";
 
-
 export function getUrlToDeleteProduct(product: Product): string {
   return productsUrl + "/" + product.product_id;
 }

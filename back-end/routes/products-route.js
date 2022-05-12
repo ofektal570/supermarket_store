@@ -6,6 +6,7 @@ const router = Router();
 router.get("/", async (req, res) => {
   try {
     const productsArr = await products.findAll();
+
     return res.json(productsArr);
   } catch (err) {
     console.log(err);
@@ -18,16 +19,16 @@ router.get("/unique_id", async (req, res) => {
     products
       .findAll({
         limit: 1,
-        where: {
-        },
+        where: {},
         order: [["createdAt", "DESC"]],
       })
       .then(function (entries) {
-        let id = 1;
-        if (entries[0] != null){
+        let id = 0;
+
+        if (entries[0] != null) {
           id = entries[0].dataValues.id;
         }
-        
+
         return res.json(id + 1);
       });
   } catch (err) {
@@ -56,8 +57,8 @@ router.post("/", async (req, res) => {
 });
 
 router.delete("/:product_id", async (req, res) => {
+  const { product_id } = req.params;
   try {
-    const { product_id } = req.params;
     const productToDestroy = await products.findOne({ where: { product_id } });
 
     console.log("look!!!!", product_id);
@@ -85,8 +86,8 @@ router.delete("/", async (req, res) => {
 });
 
 router.put("/update_price", async (req, res) => {
+  const { product_id, new_price } = req.body;
   try {
-    const { product_id, new_price } = req.body;
     const productToUpdate = await products.findOne({ where: { product_id } });
 
     productToUpdate.prev_price = productToUpdate.curr_price;
@@ -102,15 +103,11 @@ router.put("/update_price", async (req, res) => {
 });
 
 router.put("/update_amount", async (req, res) => {
+  const { product_id, new_amount } = req.body;
   try {
-    const { product_id, new_amount } = req.body;
     const productToUpdate = await products.findOne({ where: { product_id } });
 
-    console.log("what is the type?", typeof new_amount);
     productToUpdate.amount = new_amount;
-
-    console.log("newAmount is ", productToUpdate.amount);
-
     await productToUpdate.save();
 
     return res.json(productToUpdate);

@@ -13,7 +13,6 @@ export class PurchasedCartService {
   private purchasedCarts: PurchasedCart[] = [];
 
   constructor(private http: HttpClient) {}
-  // const { product_name, qty, total_price, delivery_option } = req.body;
   addPurchasedCart(
     purchasedProducts: PurchasedProduct[],
     totalPrice: number,
@@ -23,7 +22,7 @@ export class PurchasedCartService {
     let productNames: string[] = [];
     let productsQty: number[] = [];
     let productsPrices: number[] = [];
-    
+
     order.purchasedProducts.forEach((purchasedProducts: PurchasedProduct) => {
       productNames.push(purchasedProducts.product_name);
       productsQty.push(purchasedProducts.qty);
@@ -46,7 +45,6 @@ export class PurchasedCartService {
   }
 
   loadPurchasedCarts() {
-    // return this.purchasedCarts;
     this.http.get(ordersUrl).subscribe((orders: any) => {
       this.initPurchasedCarts(orders.ordersArr);
       this.purchasedCartsListener.next(this.purchasedCarts);
@@ -58,14 +56,8 @@ export class PurchasedCartService {
 
     ordersArr.forEach((order) => {
       let purchasedProducts: PurchasedProduct[] = [];
-      // let productNames: string[] = [];
-      // let productsQty: number[] = [];
-      // let productsPrices: number[] = [];
-      for (let i = 0; i < order.qty.length; i++) {
-        // productNames.push(order.productName);
-        // productsQty.push(order.qty);
-        // productsPrices.push(order.price);
 
+      for (let i = 0; i < order.qty.length; i++) {
         purchasedProducts.push(
           new PurchasedProduct(
             order.product_name[i],
@@ -79,7 +71,6 @@ export class PurchasedCartService {
         new PurchasedCart(
           purchasedProducts,
           this.calcTotal(purchasedProducts, order.delivery_option),
-          // parseFloat(order.total_price),
           order.delivery_option
         )
       );
@@ -92,11 +83,11 @@ export class PurchasedCartService {
   listenPurchasedCarts(): Observable<PurchasedCart[]> {
     return this.purchasedCartsListener.asObservable();
   }
-  
+
   calcTotal(purchasedProducts: PurchasedProduct[], delivery_option: string): number {
-    let totalPrice = delivery_option === '2' ? 5 : 0;
+    let totalPrice = delivery_option === "2" ? 5 : 0;
     for (let product of purchasedProducts) {
-      totalPrice += (product.price * product.qty);
+      totalPrice += product.price * product.qty;
     }
     return totalPrice;
   }

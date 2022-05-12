@@ -6,12 +6,6 @@ section {
   background-color: #208df360;
 }
 
-/* @media (min-width: 1025px) {
-  .h-custom {
-    height: 100vh !important;
-  }
-} */
-
 @media (min-width: 992px) {
   .card-registration-2 .bg-grey {
     border-top-right-radius: 16px;

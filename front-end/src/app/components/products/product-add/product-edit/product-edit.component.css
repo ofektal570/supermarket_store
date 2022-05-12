@@ -1,12 +1,12 @@
-p{
+p {
   text-align: center;
-  margin-top:50px;
+  margin-top: 50px;
   border-style: dotted;
 }
 
-.container{
+.container {
   text-align: center;
-  margin-top:20px;
+  margin-top: 20px;
   margin-left: auto;
   margin-right: auto;
   cursor: pointer;

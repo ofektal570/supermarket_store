@@ -14,12 +14,6 @@ export class ProductTrackingPricesService {
 
   constructor(private http: HttpClient) {}
 
-  // getProductsTrackingPrices(): ProductTrackingPrices[] {
-  //   this.loadProductsTrackingPrices();
-
-  //   return this.productsTrackingPrices;
-  // }
-
   loadProductsTrackingPrices(): void {
     this.http.get(pricesUrl).subscribe((pricesSummary) => {
       this.initProductsTrackingPrices(pricesSummary);
@@ -34,38 +28,26 @@ export class ProductTrackingPricesService {
     }
     this.productsTrackingPricesListener.next(this.productsTrackingPrices);
   }
-  // const {product_id, prev_price, curr_price} = req.body;
 
   updateProductPrices(product_id: number, prev_price: number, curr_price: number): void {
-    // for (let productTracking of this.productsTrackingPrices) {
-    //   if (productTracking.product === product) {
-    //     productTracking.addNewTracking(product.prev_price, product.curr_price);
-    //     isExist = true;
-    //     break;
-    //   }
-    // }
-    // if (!isExist) {
-    //   this.productsTrackingPrices.push(new ProductTrackingPrices(product));
-    // }
     this.http
       .post(pricesUrl, {
         product_id,
         prev_price,
-        curr_price
+        curr_price,
       })
       .subscribe(() => {
         this.loadProductsTrackingPrices();
       });
-    // this.productsTrackingPricesListener.next(this.productsTrackingPrices);
   }
 
   listenProductTrackingPrices(): Observable<ProductTrackingPrices[]> {
     return this.productsTrackingPricesListener.asObservable();
   }
-  
-  deleteProductTracking(product: Product): void{
+
+  deleteProductTracking(product: Product): void {
     this.http.delete(getUrlToRemoveTrackingProduct(product)).subscribe(() => {
-      console.log('deleted');
+      console.log("deleted");
     });
   }
 }

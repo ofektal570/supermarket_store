@@ -6,6 +6,7 @@ const router = Router();
 router.get("/", async (req, res) => {
   try {
     const pricesArr = await price.findAll();
+
     let productsName = [];
     for (let item of pricesArr) {
       const product_id = item.product_id;
@@ -15,7 +16,6 @@ router.get("/", async (req, res) => {
       }
     }
 
-    // pricesArr[names] = productsName;
     return res.json({
       names: productsName,
       prices: pricesArr,
@@ -27,9 +27,8 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
+  const { product_id, prev_price, curr_price } = req.body;
   try {
-    const { product_id, prev_price, curr_price } = req.body;
-
     let productTracked = await price.findOne({ where: { product_id } });
 
     if (productTracked === null) {
@@ -38,7 +37,6 @@ router.post("/", async (req, res) => {
 
       productTracked = await price.create({ product_id, prices, dates });
     } else {
-      // productTracked.prices.push(curr_price);
       let prices = [...productTracked.prices];
       prices.push(curr_price);
       productTracked.prices = prices;
@@ -47,7 +45,6 @@ router.post("/", async (req, res) => {
       dates.push(new Date());
       productTracked.dates = dates;
 
-      // productTracked.dates.push(new Date());
       await productTracked.save();
     }
 
@@ -59,10 +56,10 @@ router.post("/", async (req, res) => {
 });
 
 router.delete("/:product_id", async (req, res) => {
+  const { product_id } = req.params;
   try {
-    const { product_id } = req.params;
     const productTracked = await price.findOne({ where: { product_id } });
-    if(productTracked != null){
+    if (productTracked != null) {
       await productTracked.destroy();
     }
 

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { NgForm } from "@angular/forms";
 import { Product } from "src/app/models/product";
 import { ProductService } from "src/app/services/product.service";
@@ -22,23 +22,23 @@ export class ProductAddComponent implements OnInit {
       return;
     }
     console.log(productForm.value.ImageUrl.length);
-    
+
     if (productForm.value.ImageUrl.length > 254) {
       alert("Max Len Image is 254!");
       return;
     }
-    
-      const imageUrl =
-        productForm.value.ImageUrl === "" || productForm.value.ImageUrl === null
-          ? "https://us.123rf.com/450wm/infadel/infadel1712/infadel171200119/91684826-a-black-linear-photo-camera-logo-like-no-image-available-.jpg?ver=6"
-          : productForm.value.ImageUrl;
+
+    const imageUrl =
+      productForm.value.ImageUrl === "" || productForm.value.ImageUrl === null
+        ? "https://us.123rf.com/450wm/infadel/infadel1712/infadel171200119/91684826-a-black-linear-photo-camera-logo-like-no-image-available-.jpg?ver=6"
+        : productForm.value.ImageUrl;
 
     const newProduct = new Product(
       productForm.value.name,
       0,
       productForm.value.initPrice,
       productForm.value.initAmount,
-      imageUrl,
+      imageUrl
     );
 
     this.productService.addProduct(newProduct);

@@ -20,22 +20,11 @@ export class ProductEditComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // if (this.productService.isInitialized()) {
-    //   this.products = this.productService.initProducts();
-    // } else {
-    //   this.loadProducts();
-    // }
     this.products = this.productService.loadProducts();
     this.productService.listenProducts().subscribe((products: Product[]) => {
       this.products = products;
     });
   }
-
-  // loadProducts():void {
-  //   this.productService.getProducts().subscribe((products) => {
-  //     this.products = products;
-  //   });
-  // }
 
   onDeleteProduct(productToDelete: Product): void {
     if (confirm("Are you sure to delete " + productToDelete.name + "?")) {
@@ -53,12 +42,6 @@ export class ProductEditComponent implements OnInit {
       this.isPriceValid(productForm.value.price) &&
       productForm.value.price !== productToUpdatePrice.curr_price
     ) {
-      console.log(
-        "YOU IN CURR/VALUE/ID",
-        productToUpdatePrice.curr_price,
-        productForm.value.price,
-        productToUpdatePrice.product_id
-      );
       let currPrice = productToUpdatePrice.curr_price;
       let newPrice = productForm.value.price;
       this.productService.updateProductPrice(productToUpdatePrice, newPrice);

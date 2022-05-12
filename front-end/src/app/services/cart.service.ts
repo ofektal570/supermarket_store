@@ -1,4 +1,4 @@
-import { HostListener, Injectable, OnDestroy, OnInit } from "@angular/core";
+import { Injectable } from "@angular/core";
 import { Observable, Subject } from "rxjs";
 import { CartItem } from "../models/cart-item";
 import { Product } from "../models/product";
@@ -18,45 +18,7 @@ export class CartService {
   private cartItemsListener = new Subject<CartItem[]>();
   private deliveryType = 1;
 
-  constructor(private http: HttpClient) {
-    // this.http.get(cartUrl).subscribe((cartItems) => {
-    //   this.initCartItems(cartItems);
-    // });
-  }
-
-  // saveCart() {
-  //   let productsIdArr: number[] = [];
-  //   let qtyArr: number[] = [];
-  //   let deliveryOption = this.deliveryType == 2 ? 'delivery' : 'take-away';
-
-  //   this.cartItems.forEach((cartItem) => {
-  //     productsIdArr.push(cartItem.product.product_id);
-  //     qtyArr.push(cartItem.qty);
-  //   });
-
-  //   this.http
-  //     .put(cartUrl, {
-  //       product_id: productsIdArr,
-  //       qty: qtyArr,
-  //       delivery_option: deliveryOption,
-  //     })
-  //     .subscribe((cartItems) => {
-  //       console.log("did it");
-  //     });
-  // }
-
-  // initCartItems(cartItems: any): void {
-  //   // console.log('SSSSSSSSSSSSSSSSSSSSS',cartItems);
-  //   const productsArr = cartItems.productsArr;
-  //   const qtyArr = cartItems.qty;
-
-  //   for (let i = 0; i < productsArr.length; i++) {
-  //     this.cartItems.push(new CartItem(productsArr[i], qtyArr[i]));
-  //   }
-
-  //   this.deliveryType = cartItems.delivery_option === "delivery" ? 2 : 1;
-  //   this.cartItemsListener.next(this.cartItems);
-  // }
+  constructor(private http: HttpClient) {}
 
   getCartItems(): CartItem[] {
     this.loadCartItems();
@@ -71,7 +33,6 @@ export class CartService {
   }
   initCartItems(productsArr: any[], qtyArr: number[], delivery_option: string): void {
     let cart: CartItem[] = [];
-    // console.log(productsArr);
     for (let i = 0; i < productsArr.length; i++) {
       cart.push(new CartItem(productsArr[i], qtyArr[i]));
     }
@@ -98,8 +59,6 @@ export class CartService {
     } else {
       this.updateQtyInDB(product.product_id, currQty + 1);
     }
-
-    // this.cartItemsListener.next(this.cartItems);
   }
 
   updateQtyInDB(product_id: number, qty: number): void {
@@ -125,10 +84,6 @@ export class CartService {
   }
 
   removeProductFromCart(product: Product): void {
-    // this.cartItems = this.cartItems.filter(
-    //   (cartItem: CartItem) => cartItem.product !== product
-    // );
-    // this.cartItemsListener.next(this.cartItems);
     this.http.delete(getUrlToReturnProduct(product)).subscribe(() => {
       this.loadCartItems();
     });
@@ -139,8 +94,6 @@ export class CartService {
   }
 
   emptyCart(): void {
-    // this.cartItems = [];
-    // this.cartItemsListener.next(this.cartItems);
     this.http.delete(cartUrl).subscribe(() => {
       this.loadCartItems();
     });

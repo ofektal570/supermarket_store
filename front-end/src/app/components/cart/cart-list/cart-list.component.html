@@ -45,7 +45,9 @@
                   <div class="mb-4 pb-2">
                     <select class="form-select" (change)="deliveryOption($event)">
                       <option value="1">Take-Away - Free</option>
-                      <option value="2" [selected]="deliveryType === 2">Standard-Delivery - $5.00</option>
+                      <option value="2" [selected]="deliveryType === 2">
+                        Standard-Delivery - $5.00
+                      </option>
                     </select>
                   </div>
                   <form #couponForm="ngForm">

@@ -10,8 +10,8 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
+  const { product_name, qty, total_price, delivery_option } = req.body;
   try {
-    const { product_name, qty, total_price, delivery_option } = req.body;
     const orderSummary = await order.create({
       product_name,
       qty,
@@ -27,13 +27,13 @@ router.post("/", async (req, res) => {
 });
 
 router.delete("/:id", async function (req, res) {
+  const { id } = req.params;
   try {
-    const { id } = req.params;
     const orderSummary = await order.findOne({ where: { id } });
 
     await orderSummary.destroy();
 
-    return res.json("deleted!");
+    return res.json(orderSummary);
   } catch (err) {
     console.log(err);
     return res.status(500).json({ error: "something went wrong!!" });
@@ -52,4 +52,5 @@ router.delete("/", async function (req, res) {
     return res.status(500).json({ error: "something went wrong" });
   }
 });
+
 module.exports = router;
