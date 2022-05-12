@@ -21,20 +21,19 @@ export class ProductAddComponent implements OnInit {
       productForm.resetForm();
       return;
     }
-    console.log(productForm.value.ImageUrl.length);
-
-    if (productForm.value.ImageUrl.length > 254) {
-      alert("Max Len Image is 254!");
-      return;
-    }
 
     const imageUrl =
       productForm.value.ImageUrl === "" || productForm.value.ImageUrl === null
         ? "https://us.123rf.com/450wm/infadel/infadel1712/infadel171200119/91684826-a-black-linear-photo-camera-logo-like-no-image-available-.jpg?ver=6"
         : productForm.value.ImageUrl;
 
+    if (imageUrl > 254) {
+      alert("Max Len Image is 254!");
+      return;
+    }
+
     const newProduct = new Product(
-      productForm.value.name,
+      this.arrangeName(productForm.value.name),
       0,
       productForm.value.initPrice,
       productForm.value.initAmount,
@@ -43,5 +42,16 @@ export class ProductAddComponent implements OnInit {
 
     this.productService.addProduct(newProduct);
     productForm.resetForm();
+  }
+
+  arrangeName(str: string): string {
+    const arr = str.split(" ");
+
+      for (let i = 0; i < arr.length; i++) {
+        arr[i] = arr[i].charAt(0).toUpperCase() + arr[i].slice(1);
+      }
+
+
+    return arr.join(" ");
   }
 }

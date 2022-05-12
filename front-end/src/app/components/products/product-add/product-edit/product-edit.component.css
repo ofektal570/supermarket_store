@@ -4,6 +4,11 @@ p {
   border-style: dotted;
 }
 
+.reset-btn{
+  /* width: 100px;   */
+  background-color: grey;
+}
+
 .container {
   text-align: center;
   margin-top: 20px;
@@ -12,3 +17,4 @@ p {
   cursor: pointer;
   width: 80%;
 }
+

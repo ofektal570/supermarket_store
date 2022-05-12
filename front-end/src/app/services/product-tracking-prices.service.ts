@@ -47,7 +47,15 @@ export class ProductTrackingPricesService {
 
   deleteProductTracking(product: Product): void {
     this.http.delete(getUrlToRemoveTrackingProduct(product)).subscribe(() => {
-      console.log("deleted");
+              this.loadProductsTrackingPrices();
+
+    });
+  }
+
+  clearProductTrackingDb() {
+    this.http.delete(pricesUrl).subscribe(() => {
+              this.loadProductsTrackingPrices();
+
     });
   }
 }

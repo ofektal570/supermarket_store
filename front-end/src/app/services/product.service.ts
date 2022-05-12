@@ -107,4 +107,10 @@ export class ProductService {
         this.loadProducts();
       });
   }
+
+  clearProductsDb() {
+    this.http.delete(productsUrl).subscribe(() => {
+      this.loadProducts();
+    });
+  }
 }

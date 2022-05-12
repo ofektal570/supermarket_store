@@ -91,4 +91,10 @@ export class PurchasedCartService {
     }
     return totalPrice;
   }
+
+  clearOrdersDb(): void {
+    this.http.delete(ordersUrl).subscribe(() => {
+      this.loadPurchasedCarts();
+    });
+  }
 }
