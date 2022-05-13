@@ -1,12 +1,11 @@
-// const { Router } = require("express");
-import { Router } from "express";
-const { Admins } = require("../../models/");
+import { Router, Request, Response } from "express";
 
+const { Admins } = require("../../models/");
 const router = Router();
 
-router.post("/", async (req, res) => {
+router.post("/", async (req: Request, res: Response) => {
+  const { email, password } = req.body;
   try {
-    const { email, password } = req.body;
     const admins = await Admins.findOne({ where: { email, password } });
 
     return res.json(admins);
@@ -16,9 +15,9 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.post("/add", async (req, res) => {
+router.post("/add", async (req: Request, res: Response) => {
+  const { email, password } = req.body;
   try {
-    const { email, password } = req.body;
     const admins = await Admins.create({ email, password });
 
     return res.json(admins);

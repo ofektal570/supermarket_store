@@ -1,10 +1,10 @@
-import { Router } from "express";
+import { Router, Request, Response } from "express";
 
 const { products } = require("../../models/");
 
 const router = Router();
 
-router.get("/", async (req, res) => {
+router.get("/", async (req: Request, res: Response) => {
   try {
     const productsArr = await products.findAll();
 
@@ -15,7 +15,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get("/unique_id", async (req, res) => {
+router.get("/unique_id", async (req: Request, res: Response) => {
   try {
     products
       .findAll({
@@ -23,7 +23,7 @@ router.get("/unique_id", async (req, res) => {
         where: {},
         order: [["createdAt", "DESC"]],
       })
-      .then(function (entries: { dataValues: { id: number; }; }[]) {
+      .then(function (entries: { dataValues: { id: number } }[]) {
         let id = 0;
 
         if (entries[0] != null) {
@@ -38,7 +38,7 @@ router.get("/unique_id", async (req, res) => {
   }
 });
 
-router.post("/", async (req, res) => {
+router.post("/", async (req: Request, res: Response) => {
   const { name, prev_price, curr_price, amount, image_url, product_id } = req.body;
   try {
     const productsArr = await products.create({
@@ -57,7 +57,7 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.delete("/:product_id", async (req, res) => {
+router.delete("/:product_id", async (req: Request, res) => {
   const { product_id } = req.params;
   try {
     const productToDestroy = await products.findOne({ where: { product_id } });
@@ -72,7 +72,7 @@ router.delete("/:product_id", async (req, res) => {
   }
 });
 
-router.delete("/", async (req, res) => {
+router.delete("/", async (req: Request, res) => {
   try {
     products.destroy({
       where: {},
@@ -86,7 +86,7 @@ router.delete("/", async (req, res) => {
   }
 });
 
-router.put("/update_price", async (req, res) => {
+router.put("/update_price", async (req: Request, res) => {
   const { product_id, new_price } = req.body;
   try {
     const productToUpdate = await products.findOne({ where: { product_id } });
@@ -103,7 +103,7 @@ router.put("/update_price", async (req, res) => {
   }
 });
 
-router.put("/update_amount", async (req, res) => {
+router.put("/update_amount", async (req: Request, res: Response) => {
   const { product_id, new_amount } = req.body;
   try {
     const productToUpdate = await products.findOne({ where: { product_id } });

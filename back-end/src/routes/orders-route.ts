@@ -1,17 +1,15 @@
-// const { Router } = require("express");
-import { Router } from "express";
+import { Router, Request, Response } from "express";
 
-const { order, products } = require("../../models/");
-
+const { order } = require("../../models/");
 const router = Router();
 
-router.get("/", async (req, res) => {
+router.get("/", async (req: Request, res: Response) => {
   let ordersArr = await order.findAll();
 
   return res.json({ ordersArr });
 });
 
-router.post("/", async (req, res) => {
+router.post("/", async (req: Request, res: Response) => {
   const { product_name, qty, total_price, delivery_option } = req.body;
   try {
     const orderSummary = await order.create({
@@ -28,7 +26,7 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.delete("/:id", async function (req, res) {
+router.delete("/:id", async (req: Request, res: Response) => {
   const { id } = req.params;
   try {
     const orderSummary = await order.findOne({ where: { id } });
@@ -42,7 +40,7 @@ router.delete("/:id", async function (req, res) {
   }
 });
 
-router.delete("/", async function (req, res) {
+router.delete("/", async (req: Request, res: Response) => {
   try {
     order.destroy({
       where: {},

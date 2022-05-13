@@ -1,9 +1,8 @@
 import express, { Request, Response, NextFunction } from "express";
-import { SocketIo } from "./socket-io";
-
-const morgan = require("morgan");
+import { SocketIo } from "./models/socket-io";
 
 const { sequelize } = require("../models/");
+const morgan = require("morgan");
 const adminsRoute = require("./routes/admins-route");
 const productsRoute = require("./routes/products-route");
 const cartRoute = require("./routes/cart-route");
@@ -37,9 +36,6 @@ app.use("/prices", pricesRoute);
 app.use("/orders", ordersRoute);
 app.use("/socket-io", socketRoute);
 
-app.get("/", async (req, res) => {
-  res.json("connected!");
-});
 // Uploading a server + connect to DB
 const server = app.listen({ port }, async () => {
   console.log("Server Listening to port ", port);

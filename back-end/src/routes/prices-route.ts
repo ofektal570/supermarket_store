@@ -1,11 +1,10 @@
-// const { Router } = require("express");
-import { Router } from "express";
+import { Router, Request, Response } from "express";
 
 const { price, products } = require("../../models/");
 
 const router = Router();
 
-router.get("/", async (req, res) => {
+router.get("/", async (req: Request, res: Response) => {
   try {
     const pricesArr = await price.findAll();
 
@@ -28,7 +27,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.post("/", async (req, res) => {
+router.post("/", async (req: Request, res: Response) => {
   const { product_id, prev_price, curr_price } = req.body;
   try {
     let productTracked = await price.findOne({ where: { product_id } });
@@ -57,7 +56,7 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.delete("/:product_id", async (req, res) => {
+router.delete("/:product_id", async (req: Request, res: Response) => {
   const { product_id } = req.params;
   try {
     const productTracked = await price.findOne({ where: { product_id } });
@@ -72,7 +71,7 @@ router.delete("/:product_id", async (req, res) => {
   }
 });
 
-router.delete("/", async (req, res) => {
+router.delete("/", async (req: Request, res: Response) => {
   try {
     price.destroy({
       where: {},

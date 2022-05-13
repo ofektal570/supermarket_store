@@ -1,13 +1,10 @@
-// const { Router } = require("express");
-import { Router } from "express";
-import { SocketIo } from "../socket-io";
+import { Router, Request, Response } from "express";
+import { SocketIo } from "../models/socket-io";
 
 const { products, price } = require("../../models/");
-
-
 const router = Router();
 
-router.put("/update_price", async (req, res) => {
+router.put("/update_price", async (req: Request, res: Response) => {
   const { product_id, new_price } = req.body;
   try {
     // update product and emit event
@@ -41,7 +38,7 @@ router.put("/update_price", async (req, res) => {
 
       await productTracked.save();
     }
-    
+
     return res.json(productToUpdate);
   } catch (err) {
     console.log(err);

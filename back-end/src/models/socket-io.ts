@@ -1,7 +1,5 @@
 const EventEmitter = require("events");
 
-// const SocketIoObject = new SocketIo();
-
 export class SocketIo {
   private static eventEmitter = new EventEmitter();
 
