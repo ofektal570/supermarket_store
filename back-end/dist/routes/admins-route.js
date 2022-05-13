@@ -24,4 +24,15 @@ router.post("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         return res.status(500).json({ error: "something went wrong" });
     }
 }));
+router.post("/add", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { email, password } = req.body;
+        const admins = yield Admins.create({ email, password });
+        return res.json(admins);
+    }
+    catch (err) {
+        console.log(err);
+        return res.status(500).json({ error: "something went wrong!!" });
+    }
+}));
 module.exports = router;

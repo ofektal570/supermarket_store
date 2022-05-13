@@ -15,7 +15,11 @@ const { cart, products } = require("../../models/");
 const router = (0, express_1.Router)();
 router.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const cartItems = yield cart.findAll();
+        let cartItems = yield cart.findAll();
+        if (cartItems.length == 0) {
+            yield cart.create({ product_id: [], qty: [], delivery_option: "take-away" });
+            cartItems = yield cart.findAll();
+        }
         if (cartItems[0].dataValues.product_id !== null) {
             const proudctsId = cartItems[0].dataValues.product_id;
             let productsArr = [];

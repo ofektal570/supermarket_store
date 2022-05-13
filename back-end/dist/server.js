@@ -22,10 +22,9 @@ const cartRoute = require("./routes/cart-route");
 const pricesRoute = require("./routes/prices-route");
 const ordersRoute = require("./routes/orders-route");
 const socketRoute = require("./routes/socket-io-route");
-// const socketIoObject = require("./socket-io");
 const socketio = require("socket.io");
 const app = (0, express_1.default)();
-let port = 3000;
+let port = process.env.PORT || 3000;
 app.use(morgan("dev"));
 app.use(express_1.default.json());
 // Prevent Cors
@@ -42,6 +41,9 @@ app.use("/cart", cartRoute);
 app.use("/prices", pricesRoute);
 app.use("/orders", ordersRoute);
 app.use("/socket-io", socketRoute);
+app.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    res.json("connected!");
+}));
 // Uploading a server + connect to DB
 const server = app.listen({ port }, () => __awaiter(void 0, void 0, void 0, function* () {
     console.log("Server Listening to port ", port);
