@@ -20,8 +20,10 @@ export class CartItemComponent implements OnInit {
   onChangeQty(qtyUser: any): void {
     if (parseInt(qtyUser.target.value) < parseInt(qtyUser.target.min)) {
       qtyUser.target.value = qtyUser.target.min;
+      alert("You can't add less then the min amount!")
     } else if (parseInt(qtyUser.target.value) > parseInt(qtyUser.target.max)) {
       qtyUser.target.value = qtyUser.target.max;
+      alert("You can't add more then the max amount!");
     }
     let firstAmountProduct = this.cartItem.product.amount + this.cartItem.qty;
     let newValue = parseInt(qtyUser.target.value);

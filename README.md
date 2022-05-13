@@ -19,6 +19,10 @@ Technologies: Front: Angular 12 framework + Angular Material + Bootstrap. Back: 
 
 How to Run the Project:
 
-Run: One process (supermarket-frontend): "npm install" to install the dependencies modules. "ng serve" to run the project in your local host.
+Run: 
+  One process (supermarket-frontend): 
+  "npm install" to install the dependencies modules. 
+  "ng serve" to run the project in your local host.
 
-Another process (supermarket-backend): runs on the web.
+Another process (supermarket-backend): 
+  runs on the web.
