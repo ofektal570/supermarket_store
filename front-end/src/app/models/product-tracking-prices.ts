@@ -23,7 +23,7 @@ export class ProductTrackingPrices {
     }
   }
 
-  addNewTracking(prevPrice: number, currPrice: number, dateTrack: string) {
+  addNewTracking(prevPrice: number, currPrice: number, dateTrack: string): void {
     let arrowDirection = "";
     let precentsChange: number | string = ((prevPrice - currPrice) / prevPrice) * 100;
     if (precentsChange > 0) {

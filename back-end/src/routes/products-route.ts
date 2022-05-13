@@ -90,7 +90,8 @@ router.put("/update_price", async (req: Request, res) => {
   const { product_id, new_price } = req.body;
   try {
     const productToUpdate = await products.findOne({ where: { product_id } });
-
+    
+    console.log("PRODUCT IS", productToUpdate);
     productToUpdate.prev_price = productToUpdate.curr_price;
     productToUpdate.curr_price = parseFloat(new_price);
 

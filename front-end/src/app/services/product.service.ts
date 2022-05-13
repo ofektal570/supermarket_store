@@ -17,7 +17,7 @@ import { ProductTrackingPricesService } from "./product-tracking-prices.service"
 })
 export class ProductService {
   private productsListener = new Subject<Product[]>();
-  products: Product[] = [];
+  private products: Product[] = [];
 
   constructor(
     private http: HttpClient,
@@ -108,7 +108,7 @@ export class ProductService {
       });
   }
 
-  clearProductsDb() {
+  clearProductsDb(): void {
     this.http.delete(productsUrl).subscribe(() => {
       this.loadProducts();
     });

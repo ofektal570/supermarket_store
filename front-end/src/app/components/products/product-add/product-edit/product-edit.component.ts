@@ -12,9 +12,9 @@ import { PurchasedCartService } from "src/app/services/purchased-cart.service";
   styleUrls: ["./product-edit.component.css"],
 })
 export class ProductEditComponent implements OnInit {
-  products: Product[] = [];
-  editedProduct: Product | undefined;
-  editMode: boolean = false;
+  public products: Product[] = [];
+  public editedProduct: Product | undefined;
+  public editMode: boolean = false;
 
   constructor(
     private productService: ProductService,
@@ -62,7 +62,7 @@ export class ProductEditComponent implements OnInit {
     productForm.resetForm();
   }
 
-  addStoreDefaultProducts() {
+  addStoreDefaultProducts(): void {
     let hamburger = new Product(
       "Hamburger",
       0,
@@ -104,35 +104,27 @@ export class ProductEditComponent implements OnInit {
     );
 
     let foods = [hamburger, pizza, hotDog, schnitzel, stake];
-    let timeout = 0;
+    let timeout = 500;
 
-    for (let dish of foods) {
+    this.productService.addProduct(hamburger);
+
+    for (let i = 1; i < foods.length; i++) {
       setTimeout(() => {
-        this.productService.addProduct(dish);
+        this.productService.addProduct(foods[i]);
       }, timeout);
 
       timeout += 500;
     }
-
-    setTimeout(() => {
-      this.productService.updateProductPrice(hamburger, 6.5);
-
-      this.productTrackingPricesService.updateProductPrices(
-        hamburger.product_id,
-        10,
-        6.5
-      );
-    }, 1000);
   }
 
-  clearDBs() {
+  clearDBs(): void {
     this.cartService.emptyCart();
     this.productTrackingPricesService.clearProductTrackingDb();
     this.productService.clearProductsDb();
     this.purchasedCartService.clearOrdersDb();
   }
 
-  ResetStore() {
+  ResetStore(): void {
     if (confirm("Are you sure to reset all the data in the store?")) {
       this.clearDBs();
       this.addStoreDefaultProducts();

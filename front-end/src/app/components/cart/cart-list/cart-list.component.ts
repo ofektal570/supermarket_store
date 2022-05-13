@@ -12,9 +12,9 @@ import { NgForm } from "@angular/forms";
   styleUrls: ["./cart-list.component.css"],
 })
 export class CartListComponent implements OnInit {
-  cartItems: CartItem[] = this.cartService.getCartItems();
-  cartTotal = 0;
-  deliveryType: number = this.cartService.getDeliveryOption();
+  public cartItems: CartItem[] = this.cartService.getCartItems();
+  public cartTotal = 0;
+  public deliveryType: number = this.cartService.getDeliveryOption();
 
   constructor(
     private cartService: CartService,

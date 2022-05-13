@@ -12,7 +12,8 @@ export class PurchasedCartService {
   private purchasedCartsListener = new Subject<PurchasedCart[]>();
   private purchasedCarts: PurchasedCart[] = [];
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
+  
   addPurchasedCart(
     purchasedProducts: PurchasedProduct[],
     totalPrice: number,

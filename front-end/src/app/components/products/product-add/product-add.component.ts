@@ -13,12 +13,11 @@ export class ProductAddComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  onSubmit(productForm: NgForm) {
+  onSubmit(productForm: NgForm):void {
     if (productForm.invalid) {
       return;
     } else if (this.productService.getNumOfProducts() >= 5) {
       alert("You can't add more than 5 products");
-      // productForm.resetForm();
       return;
     }
 
@@ -47,10 +46,9 @@ export class ProductAddComponent implements OnInit {
   arrangeName(str: string): string {
     const arr = str.toLocaleLowerCase().split(" ");
 
-      for (let i = 0; i < arr.length; i++) {
-        arr[i] = arr[i].charAt(0).toUpperCase() + arr[i].slice(1);
-      }
-
+    for (let i = 0; i < arr.length; i++) {
+      arr[i] = arr[i].charAt(0).toUpperCase() + arr[i].slice(1);
+    }
 
     return arr.join(" ");
   }

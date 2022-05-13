@@ -11,7 +11,6 @@ import { ProductService } from "src/app/services/product.service";
 })
 export class CartItemComponent implements OnInit {
   @Input() cartItem: CartItem = new CartItem(new Product("dummy", 0, 1, 1, "", 0));
-  firstAmountItem = 0;
 
   constructor(private productService: ProductService, private cartService: CartService) {}
 

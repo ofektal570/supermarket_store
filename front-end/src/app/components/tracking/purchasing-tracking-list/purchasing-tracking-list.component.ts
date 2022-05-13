@@ -8,7 +8,7 @@ import { PurchasedCartService } from "src/app/services/purchased-cart.service";
   styleUrls: ["./purchasing-tracking-list.component.css"],
 })
 export class PurchasingTrackingListComponent implements OnInit {
-  purchasedCarts: PurchasedCart[] = [];
+  public purchasedCarts: PurchasedCart[] = [];
 
   constructor(private purchasedCartsService: PurchasedCartService) {}
 
