@@ -7,13 +7,13 @@ Description:
 SPA that includes 5 pages:
 
 /store - The main page displays the products in the store. 
-         Product details: name, price, amount, percentage change from last price, if there is a discount, the last price is displayed. 
+         Product details: name, price, amount, percentage change from the last price, if there is a discount, the last price is displayed. 
          The user reviews the products list and can add them to his cart.
 
 /cart -  Located under the main page, it displays the cart details. 
          Each row displays the image of the product, name, quantity, and total price.
          The user can change the quantity for each product, the type of shipping, and add a coupon code. 
-         At the bottom, there is the total price according to the cart details and the option to checkout.
+         At the bottom, there is the total price according to the cart details and the checkout option.
 
 /system - Admins page with authentication (email:ofektal570@gmail.com, password:rootroot), 
           on this page the admin can add products to the store: name, price, amount, and image (optional). 
@@ -35,5 +35,5 @@ Run:
   "npm install" to install the dependencies modules. 
   "ng serve" to run the project in your local host.
 
-Another process (supermarket-backend): 
+Another process (supermarket-backend + postgres DB): 
   runs on the web.
