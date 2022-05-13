@@ -6,16 +6,27 @@ Description:
 
 SPA that includes 5 pages:
 
-/store - The main page. Displays the products in the store. The product details: name, price, amount, the change in percentage from the previous price, if there is a discount, the last price is displayed. The user reviews the products list and can add them to his cart.
+/store - The main page displays the products in the store. 
+         Product details: name, price, amount, percentage change from last price, if there is a discount, the last price is displayed. 
+         The user reviews the products list and can add them to his cart.
 
-/cart - Located under the main page, it displays the cart details. Each row displays the image of the product, name, quantity, and total price. The user can change the quantity for each product,the type of shipping, and add a coupon code. At the bottom, there is the total price according to the cart details and the option to make checkout.
+/cart -  Located under the main page, it displays the cart details. 
+         Each row displays the image of the product, name, quantity, and total price.
+         The user can change the quantity for each product, the type of shipping, and add a coupon code. 
+         At the bottom, there is the total price according to the cart details and the option to checkout.
 
-/system - Page for the admins with authentication (email:ofektal570@gmail.com, password:rootroot), On this page, the admin can add products to the store: name, price, amount, and image (optional). Also, the admin can change the product's prices and delete them from the store.
+/system - Admins page with authentication (email:ofektal570@gmail.com, password:rootroot), 
+          on this page the admin can add products to the store: name, price, amount, and image (optional). 
+          Also, the admin can change the product's prices and delete them from the store.
 
-/history: /orders - Displays the orders that the user made, the prices of the products are the prices when he made the checkout. /prices - Displays the changes in the prices of the products that exist in the store.
+/history: /orders - Displays all the user's orders and their details. 
+          /prices - Displays the changes in the prices of the products that exist in the store.
 
 The server can update the project's prices in real-time (connect to the client by socket.io).
-Technologies: Front: Angular 12 framework + Angular Material + Bootstrap. Back: node.js + express, postgres DB(with sequlize ORM), socket-io.
+
+Technologies: 
+      Front: Angular 12 framework + Angular Material + Bootstrap. 
+      Back: node.js + express, postgres DB(with sequelize ORM), socket-io.
 
 How to Run the Project:
 
