@@ -1,9 +1,9 @@
-/******************************************************************************
- * Author: Ofek Tal                                                           *
- * Date: 13.05.2022                                                           *
- * Description: Project Supermarket-Store                                     *
- *                                                                            *
- ******************************************************************************/
+
+  Author: Ofek Tal                                                           
+  Date: 13.05.2022                                                           
+  Description: Project Supermarket-Store                                     
+                                                                        
+
 
 Description:
 
