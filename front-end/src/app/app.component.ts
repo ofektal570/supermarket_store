@@ -1,4 +1,5 @@
 import { Component } from "@angular/core";
+import { CartService } from "./services/cart.service";
 import { ProductTrackingPricesService } from "./services/product-tracking-prices.service";
 import { ProductService } from "./services/product.service";
 import { WebSocketService } from "./services/web-socket.service";
@@ -15,6 +16,7 @@ export class AppComponent {
     private webSocketService: WebSocketService,
     private productService: ProductService,
     private productTrackingPricesService: ProductTrackingPricesService,
+    private cartService:CartService
   ) {}
 
   ngOnInit() {
@@ -22,6 +24,7 @@ export class AppComponent {
       console.log("I GOT THIS:", data);
       this.productService.loadProducts();
       this.productTrackingPricesService.loadProductsTrackingPrices();
+      this.cartService.loadCartItems();
     });
   }
 }

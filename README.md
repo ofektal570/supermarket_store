@@ -3,10 +3,7 @@
   Date: 13.05.2022                                                           
   Description: Project Supermarket-Store                                     
                                                                         
-
 ----------------------------------------------------------------------------------
-Description:
-
   SPA that includes 4 pages:
   - /store - The main page.
              Displays the products in the store.

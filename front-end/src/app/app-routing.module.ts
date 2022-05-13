@@ -10,8 +10,8 @@ const routes: Routes = [
   { path: "cart", component: StoreComponent },
   { path: "store", component: StoreComponent },
   { path: "system", component: AuthenticationAdminComponent },
-  { path: "tracking/prices", component: PriceTrackingListComponent },
-  { path: "tracking/purchased", component: PurchasingTrackingListComponent },
+  { path: "history/prices", component: PriceTrackingListComponent },
+  { path: "history/orders", component: PurchasingTrackingListComponent },
 ];
 
 @NgModule({
