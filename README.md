@@ -1,42 +1,41 @@
 
   Author: Ofek Tal                                                           
   Date: 13.05.2022                                                           
-  Description: Project Supermarket-Store                                     
+  Description: Supermarket-Store                                     
                                                                         
 
 ----------------------------------------------------------------------------------
 Description:
 
-  SPA that includes 4 pages:
-  - /store - The main page.
-             Displays the products in the store.
-             Each product has a name, price, amount, the change in percentage from the previous price, 
-             and if the price is in the sale, the last price displays too.
-             The user can look at the products, and add them to his cart.
+  SPA that includes 5 pages:
+  
+  - /store -  The main page.
+              Displays the products in the store.
+              The product details: name, price, amount, the change in percentage from the previous price, 
+              if there is a discount, the last price is displayed.
+              The user reviews the products list and can add them to his cart.
      
-  - /cart - Under the main page, the user has his cart.
-            Each row displays the image of the product, name, qty, and total price.
-            The user can change the qty by entering a number, he can also retrieve products from the store.
-            In the Summary of the cart, the user selects a type of shipping and presses the coupon code (if there is any).
-            At the bottom, there is the total price and the option to make checkout.
+  - /cart -   Located under the main page, it displays the cart details.
+              Each row displays the image of the product, name, quantity, and total price.
+              The user can change the quantity for each product,the type of shipping, and add a coupon code.
+              At the bottom, there is the total price according to the cart details and the option to make checkout.
              
-  - /system - Page for the admins with authentication (email:ofektal570@gmail.com, pass:rootroot),
-              On this page, you can add products to the store: name, price, amount, and image (optional).
-              Also, you can change the product's prices and delete them from the store.
-              The server can update the project's prices in real-time (connect to the client by socket.io)
+  - /system - Page for the admins with authentication (email:ofektal570@gmail.com, password:rootroot),
+              On this page, the admin can add products to the store: name, price, amount, and image (optional).
+              Also, the admin can change the product's prices and delete them from the store.
               
-  - /tracking: orders - this page displays the orders that the user made, the prices of the products are the prices when he made the checkout.
-               prices - this page displays the changes in the prices of the products that exist in the store.
+              
+  - /history: /orders - Displays the orders that the user made, the prices of the products are the prices when he made the checkout.
+              /prices - Displays the changes in the prices of the products that exist in the store.
 
+  * The server can update the project's prices in real-time (connect to the client by socket.io).
+  
 Technologies:
-  Front: Angular 12 framework + Angular Material + bootstrap.
+  Front: Angular 12 framework + Angular Material + Bootstrap.
   Back: node.js + express, postgres DB(with sequlize ORM), socket-io.
 
-How to Install and Run the Project:
-  Install the zip and extract them.
-  Dir:
-    - supermarket-frontend
-    - supermarket-backend
+How to Run the Project:
+
   Run:
   One process (supermarket-frontend):
    "npm install" to install the dependencies modules.
