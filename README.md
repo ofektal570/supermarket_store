@@ -1,7 +1,7 @@
 Author: Ofek Tal
 Date: 13.05.2022
 Description: Supermarket-Store
-
+------------------------------------------------
 Description:
 
 SPA that includes 5 pages:
